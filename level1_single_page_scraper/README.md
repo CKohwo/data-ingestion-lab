@@ -1,6 +1,6 @@
 # Level 1 — Static Web Scraper (Jumia website reference)
 
-This Level 1 phase introduces the foundational layer of **web intelligence ingestion** — a **single-page static web scraper** designed to extract structured information from the Jumia laptops category.
+This Level 1 phase introduces the foundational layer of the **data ingestion lab** — a **single-page static web scraper** designed to extract structured information from the Jumia laptops category.
 
 It uses **BeautifulSoup** and **Requests** to capture key product attributes such as:
 - Laptop name  
