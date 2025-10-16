@@ -30,8 +30,8 @@ def fetch_laptop_details(search_item):
         for laptop in laptop_info: 
             laptop_name = laptop.select_one(Selector["name"]).text
             if any(item in laptop_name.lower() for item in search_item):   
-                price = laptop.select_one("div", class_ = "prc").text
-                ratings = laptop.select_one("div", class_ = "stars _s").text if laptop.find("div", class_ = "stars _s") else "No ratings"   
+                price = laptop.select_one(Selector["price"]).text
+                ratings = laptop.select_one(Selector["ratings"]).text if laptop.select_one(Selector["ratings"]) else "No ratings"   
                 link = laptop.find("a", href=True) 
                 link = "https://www.jumia.com.ng" + link['href'] if link else "No link available"
                 results.append({"Laptop Name":laptop_name ,"Price": price, "Ratings": ratings,"Description Link": link})  
