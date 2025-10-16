@@ -34,9 +34,10 @@ To run the Level1 scraper:
 cd level1_single_page_scraper
 pip install -r requirements.txt
 python webscraping.py
-It will prompt you to enter the laptop specification to search for (e.g. hp dell) and output a laptop.csv file containing: 
+It will prompt you to enter the laptop specification to search for (e.g. hp dell)     
+The scraper will extract relevant listings accompanied with the following -
 Laptop Name, Price, Ratings, Description Link
-The scraper will extract relevant listings, print them to console, and save the structured results in laptop.csv
+It prints them to console, and save the structured results in laptop.csv
 
 🧱 Output Example
 Laptop Name	Price	Ratings	Description Link
