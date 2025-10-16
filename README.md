@@ -42,8 +42,12 @@ web-intelligence-ingestion-lab/
 │   └── (coming soon)
 │
 └── README.md
+```
 
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
 A relentless pursuer of mastery in automation, intelligence engineering, and data systems design.
 This lab is part of a broader journey to engineer autonomy in digital ecosystems and create reusable, intelligent infrastructure for global industries.
+
+## 📜 License
+MIT License — open for learning, experimentation, and evolution.
