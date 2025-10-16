@@ -29,7 +29,7 @@ and exports them into a structured **CSV dataset** for downstream processing.
 ## 🧭 Execution
 
 ```bash
-python webscrapper.py
+python webscraping.py
 
 Then enter the laptop specification you want to search for, e.g.:
 
