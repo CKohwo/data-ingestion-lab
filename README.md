@@ -48,7 +48,7 @@ web-intelligence-ingestion-lab/
 
 ## 🧭 Version History
 
-- **v1.0.0** — Level 1: Single-page static scraper (Jumia laptops)
+- **v1.0.0** — Level 1: Single-page static scraper 
 - **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
 - **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
 - **v4.0.0** — Level 4: API + Web hybrid ingestion
