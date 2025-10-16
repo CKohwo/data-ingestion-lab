@@ -16,12 +16,12 @@ Each level represents a **functional evolution** — where logic, automation, an
 
 Each phase is a reflection of deeper system design thinking:
 
-**Level**	**Version**	**Description**
-- Level 1 -	v1.0 -	Single-page web scraper (static extraction)
-- Level 2 -	v2.0 -	Multi-page crawler (pagination & traversal)
-- Level 3	- v3.0 -	Automated ingestion cycles (scheduled data refresh)
-- Level 4	- v4.0 -	Hybrid ingestion (Scraping + APIs)
-- Level 5	- v5.0 -	Full orchestration (autonomous ingestion engine)
+**Level**	 	**Description**
+- Level 1 -	Single-page web scraper (static extraction)
+- Level 2 -	Multi-page crawler (pagination & traversal)
+- Level 3	-	Automated ingestion cycles (scheduled data refresh)
+- Level 4	-	Hybrid ingestion (Scraping + APIs)
+- Level 5	-	Full orchestration (autonomous ingestion engine)
 
 This structure mirrors the way intelligent systems evolve: from reactive scripts to self-sustaining data organisms.
 
@@ -46,12 +46,13 @@ web-intelligence-ingestion-lab/
 └── README.md
 ```
 
-## 🔖 Version History
-Version	Update	Summary
-v1.0.0	Initial release	Implemented single-page Jumia scraper (Level 1)
-v1.1.0	Planned	Extend crawler to handle pagination and structured traversal
-v1.2.0	Planned	Add data export, cleaning, and validation pipelines
-v2.0.0	Planned	Integrate automation cycles and API hybrid ingestion
+## 🧭 Version History
+
+- **v1.0.0** — Level 1: Single-page static scraper (Jumia laptops)
+- **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
+- **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
+- **v4.0.0** — Level 4: API + Web hybrid ingestion
+- **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
