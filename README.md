@@ -15,11 +15,13 @@ Each level represents a **functional evolution** — where logic, automation, an
 ## ⚙️ Core Philosophy
 
 Each phase is a reflection of deeper system design thinking:
-- **Level 1** → Static extraction (single-page comprehension)
-- **Level 2** → Multi-page crawling (system traversal)
-- **Level 3** → Automation cycles (time-aware data refresh)
-- **Level 4** → Hybridization (API + Scraping integration)
-- **Level 5** → Full orchestration (autonomous data ingestion)
+
+**Level**	 	**Description**
+- Level 1 -	Single-page web scraper (static extraction)
+- Level 2 -	Multi-page crawler (pagination & traversal)
+- Level 3	-	Automated ingestion cycles (scheduled data refresh)
+- Level 4	-	Hybrid ingestion (Scraping + APIs)
+- Level 5	-	Full orchestration (autonomous ingestion engine)
 
 This structure mirrors the way intelligent systems evolve: from reactive scripts to self-sustaining data organisms.
 
@@ -43,6 +45,14 @@ web-intelligence-ingestion-lab/
 │
 └── README.md
 ```
+
+## 🧭 Version History
+
+- **v1.0.0** — Level 1: Single-page static scraper 
+- **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
+- **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
+- **v4.0.0** — Level 4: API + Web hybrid ingestion
+- **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect

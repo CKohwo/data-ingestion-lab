@@ -26,17 +26,20 @@ and exports them into a structured **CSV dataset** for downstream processing.
 
 ---
 
-## 🧭 Execution
+## 🧭 Getting Started - level1
+
+To run the Level1 scraper:  
 
 ```bash
+cd level1_single_page_scraper
+pip install -r requirements.txt
 python webscraping.py
-
-Then enter the laptop specification you want to search for, e.g.:
-
-Enter the laptop specification you want to search for: hp dell
-
-The scraper will extract relevant listings, print them to console, and save the structured results in laptop.csv.
-
+```
+It will prompt you to enter the laptop specification to search for (e.g. hp dell)     
+The scraper will extract relevant listings accompanied with the following -
+Laptop Name, Price, Ratings, Description Link
+It prints them to console, and save the structured results in laptop.csv
+ ```
 🧱 Output Example
 Laptop Name	Price	Ratings	Description Link
 HP 250 G8	₦450,000	★★★★☆	https://www.jumia.com.ng/hp-250-g8-
@@ -44,6 +47,7 @@ HP 250 G8	₦450,000	★★★★☆	https://www.jumia.com.ng/hp-250-g8-
 Dell Latitude 3420	₦510,000	No ratings	https://www.jumia.com.ng/dell-latitude-
 ...
 ```
+A sample.csv is included for reference 
 ---
 
 ## 🧩 Next Level Preview
