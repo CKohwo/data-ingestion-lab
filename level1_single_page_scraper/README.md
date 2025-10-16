@@ -34,11 +34,12 @@ To run the Level1 scraper:
 cd level1_single_page_scraper
 pip install -r requirements.txt
 python webscraping.py
+```
 It will prompt you to enter the laptop specification to search for (e.g. hp dell)     
 The scraper will extract relevant listings accompanied with the following -
 Laptop Name, Price, Ratings, Description Link
 It prints them to console, and save the structured results in laptop.csv
-
+ ```
 🧱 Output Example
 Laptop Name	Price	Ratings	Description Link
 HP 250 G8	₦450,000	★★★★☆	https://www.jumia.com.ng/hp-250-g8-
