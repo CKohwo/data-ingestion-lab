@@ -44,7 +44,9 @@ HP 250 G8	₦450,000	★★★★☆	https://www.jumia.com.ng/hp-250-g8-
 Dell Latitude 3420	₦510,000	No ratings	https://www.jumia.com.ng/dell-latitude-
 ...
 ```
+---
 
-#🧩 Next Level Preview
+## 🧩 Next Level Preview
+
 Level 2 will extend this foundation into multi-page crawling, traversing paginated content dynamically to capture complete category datasets.
  
