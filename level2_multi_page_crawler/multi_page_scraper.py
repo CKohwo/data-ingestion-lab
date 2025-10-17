@@ -71,7 +71,7 @@ def fetch_all_laptops(base_url, headers, selector, search_item):
         if not next_page:
             break   
         page += 1
-        time.sleep(10)  # Be polite and avoid overwhelming the server
+        time.sleep(5)  # Be polite and avoid overwhelming the server
     
     return final_results
  
