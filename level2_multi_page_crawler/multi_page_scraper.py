@@ -52,6 +52,8 @@ def fetch_all_laptops(base_url, headers, selector, search_item):
     final_results = []
     while True:
         print(f"Scraping page {page}...")
+
+        # Enclosing the request in a try-except block to handle potential errors
         try:
             # Calling the url within the function
             url = f"{base_url}?page={page}"
