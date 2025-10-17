@@ -87,8 +87,8 @@ time	For crawl delays
 
 - Configurable headers and base URL for portability
 
-
-##🌱 Next Milestone — Level 3: Modularization
+ 
+## 🌱 Next Milestone — Level 3: Modularization
 
 Level 3 will transform this crawler into a modular scraping architecture, introducing:
 
