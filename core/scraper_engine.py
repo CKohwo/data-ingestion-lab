@@ -10,7 +10,7 @@ headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64), AppleWebKit
 # Define the laptop selectors inorder to prevent hardcoding and follow the DRY principle
 # Added selector for pagination  
 selector = {
-     "laptop_card": "article.prd._fb.col.c-prd",
+     "id": "article.prd._fb.col.c-prd",
      "name": "h3.name",
      "price": "div.prc",
      "ratings": "div.stars._s",  
@@ -21,22 +21,20 @@ response = requests.get(base_url, headers=headers)
 soup = BeautifulSoup(response.text, "html5lib")
 
 # Function to fetch laptop details from Jumia
-def fetch_product_from_page(soup, selector, search_item):
+def fetch_product_from_page(soup, selector):
     try: 
-        laptop_info = soup.select(selector["laptop_card"])  
+        laptop_info = soup.select(selector["id"])  
         # List to store the laptop details
         results = []
         
         # Loop through each laptop and extract details
         for laptop in laptop_info: 
             laptop_name = laptop.select_one(selector["name"]).text
-            
-            if any(item in laptop_name.lower() for item in search_item):   
-                price = laptop.select_one(selector["price"]).text
-                ratings = laptop.select_one(selector["ratings"]).text if laptop.select_one(selector["ratings"]) else "No ratings"   
-                link = laptop.find("a", href=True) 
-                link = "https://www.jumia.com.ng" + link['href'] if link else "No link available"
-                results.append({"Name":laptop_name ,"Price": price, "Ratings": ratings,"Description Link": link})  
+            price = laptop.select_one(selector["price"]).text
+            ratings = laptop.select_one(selector["ratings"]).text if laptop.select_one(selector["ratings"]) else "No ratings"   
+            link = laptop.find("a", href=True) 
+            link = "https://www.jumia.com.ng" + link['href'] if link else "No link available"
+            results.append({"Name":laptop_name ,"Price": price, "Ratings": ratings,"Description Link": link})  
         
         return results 
     
@@ -47,7 +45,7 @@ def fetch_product_from_page(soup, selector, search_item):
 
 
 # Function which primarily fetches all laptops across all existing pages  
-def fetch_all_products(base_url, headers, selector, search_item):
+def fetch_all_products(base_url, headers, selector):
     page = 1
     final_results = []
     while True:
@@ -64,7 +62,7 @@ def fetch_all_products(base_url, headers, selector, search_item):
             print(f"An error occurred while fetching page {page}: {e}")
             break    
 
-        product = fetch_product_from_page(soup, selector, search_item)
+        product = fetch_product_from_page(soup, selector)  
         if not product:
             break
         final_results.extend(product)
@@ -94,13 +92,12 @@ def save_to_csv(product, filename):
 
 # Main function to run the script periodically
 def main():
-    search_item = input("Enter the laptop specification you want to search for: ").lower().strip().split() 
     while True:
-        final_outputs = fetch_all_products(base_url, headers, selector, search_item)
+        final_outputs = fetch_all_products(base_url, headers, selector) 
         if final_outputs:
             save_to_csv(final_outputs, "sample.csv")
         else:   
-            print("No product found matching the specified criteria.")
+            print("No product found within the dataset.")
         time.sleep(300)  # Wait for 5 minutes before the next check
         print("waiting for 5 minutes...")
           
