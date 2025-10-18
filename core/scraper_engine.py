@@ -21,7 +21,7 @@ response = requests.get(base_url, headers=headers)
 soup = BeautifulSoup(response.text, "html5lib")
 
 # Function to fetch laptop details from Jumia
-def fetch_laptop_from_page(soup, selector, search_item):
+def fetch_product_from_page(soup, selector, search_item):
     try: 
         laptop_info = soup.select(selector["laptop_card"])  
         # List to store the laptop details
@@ -36,7 +36,7 @@ def fetch_laptop_from_page(soup, selector, search_item):
                 ratings = laptop.select_one(selector["ratings"]).text if laptop.select_one(selector["ratings"]) else "No ratings"   
                 link = laptop.find("a", href=True) 
                 link = "https://www.jumia.com.ng" + link['href'] if link else "No link available"
-                results.append({"Laptop Name":laptop_name ,"Price": price, "Ratings": ratings,"Description Link": link})  
+                results.append({"Name":laptop_name ,"Price": price, "Ratings": ratings,"Description Link": link})  
         
         return results 
     
@@ -47,7 +47,7 @@ def fetch_laptop_from_page(soup, selector, search_item):
 
 
 # Function which primarily fetches all laptops across all existing pages  
-def fetch_all_laptops(base_url, headers, selector, search_item):
+def fetch_all_products(base_url, headers, selector, search_item):
     page = 1
     final_results = []
     while True:
@@ -64,10 +64,10 @@ def fetch_all_laptops(base_url, headers, selector, search_item):
             print(f"An error occurred while fetching page {page}: {e}")
             break    
 
-        laptops = fetch_laptop_from_page(soup, selector, search_item)
-        if not laptops:
+        product = fetch_product_from_page(soup, selector, search_item)
+        if not product:
             break
-        final_results.extend(laptops)
+        final_results.extend(product)
 
         next_page = soup.select_one(selector["page_next"])
         if not next_page:
@@ -80,14 +80,14 @@ def fetch_all_laptops(base_url, headers, selector, search_item):
 
 
 # Function to save the laptop details to a CSV file
-def save_to_csv(laptops, filename):
+def save_to_csv(product, filename):
 
     # For now I will utilize the write(w) functionality, but in future I can implement the append(a)  
     with open("sample.csv", "w", newline="", encoding='utf-8') as file:
-        fieldnames = ["Laptop Name", "Price", "Ratings", "Description Link"] 
+        fieldnames = ["Name", "Price", "Ratings", "Description Link"] 
         writer = csv.DictWriter(file, fieldnames=fieldnames) 
         writer.writeheader() 
-        writer.writerows(laptops)
+        writer.writerows(product)
         
     print("Laptop details saved to sample.csv")
    
@@ -96,11 +96,11 @@ def save_to_csv(laptops, filename):
 def main():
     search_item = input("Enter the laptop specification you want to search for: ").lower().strip().split() 
     while True:
-        final_outputs = fetch_all_laptops(base_url, headers, selector, search_item)
+        final_outputs = fetch_all_products(base_url, headers, selector, search_item)
         if final_outputs:
             save_to_csv(final_outputs, "sample.csv")
         else:   
-            print("No laptops found matching the specified criteria.")
+            print("No product found matching the specified criteria.")
         time.sleep(300)  # Wait for 5 minutes before the next check
         print("waiting for 5 minutes...")
           
