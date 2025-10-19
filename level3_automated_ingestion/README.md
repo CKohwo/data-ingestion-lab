@@ -1,5 +1,5 @@
 
-# 🧠 Level 3 – Automated Ingestion (Scheduled Data Refresh)
+# 🧠 Level 3 – Automated Ingestion cycles (Scheduled Data Refresh)
 
 This level marks the **evolution from a simple crawler to an intelligent ingestion system** that autonomously collects, merges, and refreshes data at scheduled intervals.  
 The automation pipeline runs every **5 days**, fetches data, then merges them into a single dataset, and committs updates directly to this repository.
