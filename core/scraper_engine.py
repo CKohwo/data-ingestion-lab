@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import html5lib
+import lxml
 import csv
 import time
 
@@ -18,7 +18,7 @@ selector = {
 }  
          
 response = requests.get(base_url, headers=headers)  
-soup = BeautifulSoup(response.text, "html5lib")
+soup = BeautifulSoup(response.text, "lxml")
 
 # Function to fetch laptop details from Jumia
 def fetch_product_from_page(soup, selector):
@@ -56,7 +56,7 @@ def fetch_all_products(base_url, headers, selector):
             # Calling the url within the function
             url = f"{base_url}?page={page}"
             response = requests.get(url, headers=headers)
-            soup = BeautifulSoup(response.text, "html5lib")
+            soup = BeautifulSoup(response.text, "lxml")
 
         except requests.exceptions.RequestException as e:
             print(f"An error occurred while fetching page {page}: {e}")

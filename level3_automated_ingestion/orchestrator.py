@@ -16,7 +16,7 @@ from core.scraper_engine import fetch_all_products
 from sites.jumia_config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = Path("data/master_dataset.csv")
+DATA_PATH = Path("level3_automated_ingestion/master_dataset.csv")
 CATEGORY_FILE = Path("sites/categories.json")
 CATEGORY_WAIT = 10  # polite delay between categories (seconds)
 
