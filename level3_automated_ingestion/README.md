@@ -51,7 +51,7 @@ Site Configuration (sites/)
 
 jumia_config.py → defines base URL, headers, and CSS selectors.
 
-categories.json → lists each category endpoint to crawl automatically.
+categories.json → lists each data endpoint to crawl automatically.
 Example:
 
 {
@@ -123,7 +123,9 @@ GitHub Actions executes the ingestion every 5 days automatically and commits the
 ## 🧭 Next Step: Level 4 – Hybrid Ingestion
 
 Transition from HTML-based scraping to a hybrid ingestion model that combines both API endpoints and web scraping, intelligently switching between them for efficiency, reliability, and fault tolerance.
+
 ---------
-**Author: Charles Onokohwomo**
-**Phase: Level 3 – Automated Ingestion**
-**Project: Data Ingestion Lab (ADIP Series)**
+
+## Author: Charles Onokohwomo 
+## Phase: Level 3 – Automated Ingestion 
+## Project: Data Ingestion Lab (ADIP Series) 
