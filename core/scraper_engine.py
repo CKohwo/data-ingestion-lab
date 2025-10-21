@@ -3,6 +3,7 @@ import requests
 import lxml
 import csv
 import time
+import random
 
 base_url = "https://www.jumia.com.ng/laptops/"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64), AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
@@ -17,7 +18,7 @@ selector = {
      "page_next":"a.pg[aria-label='Next Page']"    
 }  
          
-response = requests.get(base_url, headers=headers)  
+response = requests.get(base_url, headers=headers, timeout=15)  
 soup = BeautifulSoup(response.text, "lxml")
 
 # Function to fetch laptop details from Jumia
@@ -71,7 +72,7 @@ def fetch_all_products(base_url, headers, selector):
         if not next_page:
             break   
         page += 1
-        time.sleep(5)  # Be polite and avoid overwhelming the server
+        time.sleep(10) # Mickmicking human behavior with random delays between page requests  
     
     return final_results
  

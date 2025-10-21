@@ -31,9 +31,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add jumia_products.csv
-          git commit -m "🧠 Auto-Data-ingestion update: $(date)"
-          git push
+          git add .
+          git diff --quiet && echo "No new data changes to commit." || (git commit -m "🧠 Auto-Data-ingestion update: $(date)" && git push) 
         env:
           GITHUB_TOKEN: ${{ secrets.GT_TOKEN }}
 

@@ -16,7 +16,7 @@ from core.scraper_engine import fetch_all_products
 from sites.jumia_config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = Path("level3_multi_page_ingestion/master_dataset.csv")
+DATA_PATH = "level3_automated_ingestion/master_dataset.csv" 
 CATEGORY_FILE = Path("sites/categories.json")
 CATEGORY_WAIT = 10  # polite delay between categories (seconds)
 
@@ -53,19 +53,17 @@ def run_ingestion_cycle():
         time.sleep(CATEGORY_WAIT)
 
     # Convert to DataFrame
-    new_df = pd.DataFrame(all_data)
-    print(f"📦 New ingestion batch: {len(new_df)} records")
+    new_data = pd.DataFrame(all_data)
+    print(f"📦 New ingestion batch: {len(new_data)} records")
 
     # If master_dataset exists, append
     try:
-        if DATA_PATH.exists() and os.path.getsize(DATA_PATH) > 0:
-            print("🔄 Existing dataset detected — appending new records...")
-            old_df = pd.read_csv(DATA_PATH)
-            combined_df = pd.concat([old_df, new_df], ignore_index=True)
-        
+        if os.path.exists(DATA_PATH) and os.path.getsize(DATA_PATH) > 0:
+            existing_df = pd.read_csv(DATA_PATH)
+            combined_df = pd.concat([existing_df, new_data], ignore_index=True)
         else:
             print("🆕 No existing dataset found — creating new master dataset...")
-            combined_df = new_df
+            combined_df = new_data
 
         # Save updated dataset
         combined_df.to_csv(DATA_PATH, index=False)
