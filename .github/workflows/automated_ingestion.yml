@@ -26,13 +26,21 @@ jobs:
 
       - name: 🚀 Run ingestion script
         run: python level3_automated_ingestion/automated_scraper.py
-
+      
+      - name: 🕵️ Debug output
+        run: |
+          echo "=== Repo structure ==="
+          ls -R
+          echo "=== Git status ==="
+          git status
+            
       - name: 💾 Commit updated dataset
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --quiet && echo "No new data changes to commit." || (git commit -m "🧠 Auto-Data-ingestion update: $(date)" && git push) 
+          git add level3_automated_ingestion/master_dataset.csv
+          git commit -m "🧠 Auto-Data-ingestion update: $(date)" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GT_TOKEN }}
 
