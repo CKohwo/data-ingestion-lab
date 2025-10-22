@@ -36,11 +36,11 @@ jobs:
             
       - name: 💾 Commit updated dataset
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "data-ingestion[bot]"
+          git config --global user.email "data-ingestion[bot]@users.noreply.github.com"
           git add level3_automated_ingestion/master_dataset.csv
           git commit -m "🧠 Auto-Data-ingestion update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
-          GITHUB_TOKEN: ${{ secrets.GT_TOKEN }}
+          GT_TOKEN: ${{ secrets.GT_TOKEN }}
 
