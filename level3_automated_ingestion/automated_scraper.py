@@ -3,6 +3,8 @@ import time
 import json 
 import pandas as pd
 import sys
+import random
+import subprocess 
 from datetime import datetime
 from pathlib import Path 
  
@@ -18,8 +20,52 @@ from sites.jumia_config import headers, selector
 # === CONFIGURATIONS === #
 DATA_PATH = "level3_automated_ingestion/master_dataset.csv" 
 CATEGORY_FILE = Path("sites/categories.json")
-CATEGORY_WAIT = 10  # polite delay between categories (seconds)
 
+# === GIT COMMIT FUNCTION === #
+"""
+This function stages, commits, and pushes the updated dataset to GitHub.    
+""" 
+
+def commit_data_to_git():
+    try:
+        GT_TOKEN = os.environ.get("GT_TOKEN")
+        if not GT_TOKEN:
+            print("❌ GT_TOKEN not set; skipping git push.")
+            return
+
+        # Build a pushable repo URL containing token (temporary, only used for push)
+        repo_remote = f"https://{GT_TOKEN}@github.com/CKohwo/data-ingestion-lab.git"
+
+        # Configure git identity
+        subprocess.run(["git", "config", "--global", "user.name", "DataIngestor-bot"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "bot@adip.io"], check=True)
+
+        # Stage file
+        subprocess.run(["git", "add", str(DATA_PATH)], check=True)
+
+        # Check if there is anything to commit
+        status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+        if str(DATA_PATH.name) not in status.stdout:
+            print("✅ No changes to commit.")
+            return
+
+        commit_msg = f"DATA: Auto-update master dataset {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+        subprocess.run(["git", "commit", "-m", commit_msg], check=True)
+
+        # Pull with rebase to avoid simple conflicts, then push
+        # Use repo_remote as the temporary remote to authenticate push
+        subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
+        subprocess.run(["git", "push", repo_remote, "HEAD:main"], check=True)
+
+        print("✅ Successfully pushed master_dataset.csv to GitHub.")
+
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Git command failed: {e}")
+    except Exception as e:
+        print(f"❌ Unexpected error during git commit: {e}")
+
+
+# === INGESTION CYCLE FUNCTION === #
 """    
 This function runs a full ingestion cycle across all categories in categories.json
 Appends timestamp + category columns and merges with master dataset if present or creates a new one.
@@ -36,11 +82,15 @@ def run_ingestion_cycle():
 
     # Loop through all categories
     for category, url in categories.items():
-        print(f"🔍 Scraping category: {category}")
-         
-          
-        # Call our reusable core engine
-        category_data = fetch_all_products(url, headers, selector)
+        try:
+            print(f"🔍 Scraping category: {category}") 
+
+            # Call our reusable core engine
+            category_data = fetch_all_products(url, headers, selector)
+
+        except Exception as e:
+            print(f"❌ Error scraping category {category}: {e}")
+            continue
 
         # Add category + timestamp metadata
         for record in category_data:
@@ -50,7 +100,7 @@ def run_ingestion_cycle():
         all_data.extend(category_data)
         print(f"✅ Completed category: {category} | {len(category_data)} items scraped\n")
 
-        time.sleep(CATEGORY_WAIT)
+        time.sleep(random.uniform(6, 11))  # Random delay between categories to mimic human behavior
 
     # Convert to DataFrame
     new_data = pd.DataFrame(all_data)
@@ -73,6 +123,8 @@ def run_ingestion_cycle():
     except Exception as e:
         print(f"❌ Error during ingestion cycle: {e}")
 
+
+
 if __name__ == "__main__":
     run_ingestion_cycle() 
-    
+    commit_data_to_git()
