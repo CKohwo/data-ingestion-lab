@@ -22,9 +22,8 @@ DATA_PATH = "level3_automated_ingestion/master_dataset.csv"
 CATEGORY_FILE = Path("sites/categories.json")
 
 # === GIT COMMIT FUNCTION === #
-"""
-This function stages, commits, and pushes the updated dataset to GitHub.    
-""" 
+
+"""This function stages, commits, and pushes the updated dataset to GitHub."""     
 
 def commit_data_to_git():
     try:
@@ -66,10 +65,11 @@ def commit_data_to_git():
 
 
 # === INGESTION CYCLE FUNCTION === #
-"""    
-This function runs a full ingestion cycle across all categories in categories.json
-Appends timestamp + category columns and merges with master dataset if present or creates a new one.
-"""
+
+    
+"""This function runs a full ingestion cycle across all categories in categories.json
+Appends timestamp + category columns and merges with master dataset if present or creates a new one.""" 
+ 
 
 def run_ingestion_cycle():
     print("\n🚀 Starting ingestion cycle...\n")
