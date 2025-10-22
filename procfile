@@ -1,0 +1,1 @@
+worker: python level3_automated_ingestion/automated_scraper.py 
