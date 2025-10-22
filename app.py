@@ -18,7 +18,7 @@ if str(ROOT_DIR / "sites") not in sys.path:
     sys.path.append(str(ROOT_DIR / "sites"))
 
 # === Imports from your ingestion system === #
-from level3_automated_ingestion.orchestrator import run_ingestion_cycle
+from level3_automated_ingestion.automated_scraper import run_ingestion_cycle
 
 # === Flask Setup === #
 app = Flask(__name__)
@@ -104,6 +104,6 @@ def run_ingestion():
 
 if __name__ == "__main__":
     # Flask will bind to port 8080 on Replit
-    port = int(os.environ.get("PORT", 8080))
+    port = int(os.environ.get("PORT", 5000))
     print(f"🌍 Server running at http://localhost:{port}")
     app.run(host="0.0.0.0", port=port)
