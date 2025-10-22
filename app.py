@@ -1,12 +1,12 @@
 import sys
 import os
+import json
 import threading
 from pathlib import Path
-from flask import Flask, jsonify, request, abort
-from datetime import datetime
+from flask import Flask, jsonify, request
+from datetime import datetime, timedelta
 
-# === Dynamic Import Setup === #
-# (Your path setup is good and explicit)
+# === PATH SETUP === #
 ROOT_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.append(str(ROOT_DIR))
@@ -17,40 +17,65 @@ if str(ROOT_DIR / "core") not in sys.path:
 if str(ROOT_DIR / "sites") not in sys.path:
     sys.path.append(str(ROOT_DIR / "sites"))
 
-# === Imports from your ingestion system === #
+# === IMPORTS === #
 from level3_automated_ingestion.automated_scraper import run_ingestion_cycle
 
-# === Flask Setup === #
+# === FLASK SETUP === #
 app = Flask(__name__)
 
-# Get the secret key from Replit Secrets
-EXPECTED_SECRET = os.environ.get("SCRAPE_SECRET")
+EXPECTED_SECRET = os.environ.get("SCRAPE_SECRET")  # set this in Replit Secrets
+LAST_RUN_FILE = ROOT_DIR / "level3_automated_ingestion" / "last_run.json"
+RUN_INTERVAL_DAYS = 5  # minimum gap between scrapes
 
-# === Background Worker Function === #
+thread_lock = threading.Lock()
+is_running = False
+
+
+# === TIMESTAMP MANAGEMENT === #
+def get_last_run():
+    """Retrieve last ingestion timestamp."""
+    if not LAST_RUN_FILE.exists():
+        return None
+    try:
+        data = json.loads(LAST_RUN_FILE.read_text())
+        return datetime.fromisoformat(data["last_run"])
+    except Exception:
+        return None
+
+
+def update_last_run():
+    """Update the timestamp after successful ingestion."""
+    LAST_RUN_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LAST_RUN_FILE.write_text(json.dumps({"last_run": datetime.utcnow().isoformat()}))
+
+
+# === BACKGROUND THREAD FUNCTION === #
 def run_and_commit_in_background():
-    """
-    This is the wrapper that runs in a separate thread.
-    It contains the full, long-running logic.
-    """
+    global is_running
+    with thread_lock:
+        if is_running:
+            print("⚠️ Previous ingestion still running. Skipping new trigger.")
+            return
+        is_running = True
+
     try:
         print("\n🚀 [BG_THREAD_START] Automated ingestion triggered...\n")
-        
-        # We only need to call the one orchestrator function,
-        # since it's designed to handle the commit internally.
-        run_ingestion_cycle() 
-
+        run_ingestion_cycle()
+        update_last_run()
         print("\n✅ [BG_THREAD_SUCCESS] Ingestion + Commit completed.\n")
-
     except Exception as e:
         print(f"\n❌ [BG_THREAD_ERROR] Ingestion failed: {e}\n", flush=True)
+    finally:
+        with thread_lock:
+            is_running = False
 
 
-# === Flask Endpoints === #
+# === ROUTES === #
 @app.route("/")
 def home():
     """Shows the server is alive."""
     return jsonify({
-        "message": "🧠 Data Ingestion Service",
+        "message": "🧠 Data Ingestion Service Active",
         "status": "running",
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     }), 200
@@ -58,52 +83,58 @@ def home():
 
 @app.route("/health")
 def health_check():
-    """Simple route for UptimeRobot to check that the server is alive."""
+    """Simple route for UptimeRobot to check server availability."""
     return jsonify({
         "service": "data-ingestion-lab",
         "health": "OK",
+        "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     }), 200
 
 
-@app.route("/run-scrape")
+@app.route("/run-scrape", methods=["POST", "GET"])
 def run_ingestion():
     """
-    This is the *secure* endpoint that UptimeRobot will ping.
-    It validates a secret and then starts the job in a background thread.
+    Secure endpoint for triggering ingestion.
+    Use a header: X-INGEST-TOKEN: <your-secret>
     """
-    # 1. Check for Server-Side Configuration
+
+    # 1. Verify secret
     if not EXPECTED_SECRET:
-        print("❌ CONFIG_ERROR: SCRAPE_SECRET is not set in environment.")
-        return jsonify({"status": "error", "message": "Server configuration error"}), 500
+        print("❌ CONFIG_ERROR: SCRAPE_SECRET is not set.")
+        return jsonify({"status": "error", "message": "Server misconfigured"}), 500
 
-    # 2. Check for Client-Side Secret
-    secret = request.args.get('secret')
+    secret = request.headers.get("X-INGEST-TOKEN")
     if secret != EXPECTED_SECRET:
-        print(f"🔒 AUTH_FAILURE: Invalid secret key provided.")
-        return jsonify({"status": "error", "message": "Invalid authentication secret"}), 403
+        print("🔒 AUTH_FAILURE: Invalid secret.")
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
 
-    # 3. Start the job in the background
+    # 2. Check if last run was too recent
+    last_run = get_last_run()
+    if last_run:
+        elapsed = datetime.utcnow() - last_run
+        if elapsed < timedelta(days=RUN_INTERVAL_DAYS):
+            msg = f"⏳ Skipped: Last run {elapsed.days} days ago (needs {RUN_INTERVAL_DAYS}-day gap)"
+            print(msg)
+            return jsonify({"status": "skipped", "message": msg}), 200
+
+    # 3. Launch background thread
     try:
-        print("✅ [REQUEST_SUCCESS] Auth successful. Starting background thread...")
-        
-        # Create and start the background thread
+        print("✅ [REQUEST_SUCCESS] Starting background ingestion...")
         scraper_thread = threading.Thread(target=run_and_commit_in_background)
         scraper_thread.start()
 
-        # 4. Return an immediate "Accepted" response
         return jsonify({
             "status": "accepted",
-            "message": "Ingestion job started in background.",
+            "message": "Ingestion started in background.",
             "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
         }), 202
 
     except Exception as e:
         print(f"❌ [REQUEST_ERROR] Failed to start thread: {e}\n", flush=True)
-        return jsonify({"status": "error", "message": f"Failed to start thread: {e}"}), 500
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 
 if __name__ == "__main__":
-    # Flask will bind to port 8080 on Replit
     port = int(os.environ.get("PORT", 5000))
     print(f"🌍 Server running at http://localhost:{port}")
     app.run(host="0.0.0.0", port=port)
