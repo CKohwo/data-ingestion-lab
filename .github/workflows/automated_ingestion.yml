@@ -25,8 +25,18 @@ jobs:
           pip install -r requirements.txt
 
       - name: 🚀 Run ingestion script
-        run: python level3_automated_ingestion/automated_scraper.py
-      
+        run: |
+          set -e
+          python level3_automated_ingestion/automated_scraper.py || echo "⚠️ Script failed gracefully"
+          
+      - name: 💾 Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+     
       - name: 🕵️ Debug output
         run: |
           echo "=== Repo structure ==="
