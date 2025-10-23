@@ -17,7 +17,8 @@ This is a key milestone toward a fully orchestrated ingestion engine (Level 4).
 
 ----------
 
-🧩 Project Structure
+## 🧩 Project Structure
+``` bash
 data-ingestion-lab/
 │
 ├── core/
@@ -40,6 +41,7 @@ data-ingestion-lab/
 └── .github/
     └── workflows/
         └── auto_ingest.yml        # Scheduler (GitHub Actions)
+```
 
 ------------
 
@@ -91,16 +93,11 @@ Commits new data to the repository automatically.
 
 ## 🚀 How It Works
 
-- Configuration — Define endpoints in categories.json (HTML) and api_sources.json (API).
+- **Configuration** — Define endpoints in categories.json (HTML) and api_sources.json (API).
 
-- Run Locally (optional) —
-
-python level3_automated_ingestion(Scraper + APIs)/automated_scraper.py
-or
-python level3_automated_ingestion(Scraper + APIs)/api_ingestor.py
+- **Run Locally (optional)** — python level3_automated_ingestion(Scraper + APIs)/automated_scraper.py or python level3_automated_ingestion(Scraper + APIs)/api_ingestor.py
  
-- Automated Mode (default) —
-GitHub Actions triggers ingestion every 5 days, executing both engines and committing updates automatically.
+- **Automated Mode (default)** — GitHub Actions triggers ingestion every 5 days, executing both engines and committing updates automatically.
 
 --------
 
@@ -112,11 +109,13 @@ GitHub Actions triggers ingestion every 5 days, executing both engines and commi
 ✅ Version-controlled, self-sustaining data pipeline
 ✅ Scalable architecture for future orchestration (Level 5)
 
+----------
 
 ## 🧭 Next Step: Level 4 – Orchestrated Intelligence
 
 The next level transitions from hybrid ingestion to orchestration and insight automation, where the system doesn’t just collect data — it interprets, summarizes, and generates human-readable analytical insights automatically.
+-----------
 
-**Author: Charles Onokohwomo**
-Phase: Level 3 – Automated Hybrid Ingestion
-Project: Data Ingestion Lab (ADIP Series)
+## Author: Charles Onokohwomo 
+
+**Project: Data Ingestion Lab (ADIP Series)**
