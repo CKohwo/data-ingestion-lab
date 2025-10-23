@@ -77,9 +77,7 @@ Runs every 5 days on a fixed cron schedule.
 Executes both ingestion scripts sequentially.
 
 Commits new data to the repository automatically.
- --------
-
-## DATA-FLOW
+ 
 ```bash
 
 +-------------------------------+
