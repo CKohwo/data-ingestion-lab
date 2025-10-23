@@ -77,6 +77,23 @@ Runs every 5 days on a fixed cron schedule.
 Executes both ingestion scripts sequentially.
 
 Commits new data to the repository automatically.
+ --------
+## DATA-FLOW
++--------------------+
+| GitHub Actions     |
+| (Scheduler: 5 days)|
++--------------------+
+           |
++--------------------+
+| Automated Ingestor |
+|  ├── api_engine.py |
+|  └── scraper_engine.py |
++--------------------+
+           |
++----------------------+
+| Dataset Repository   |
+| (CSV auto-updates)   |
++----------------------+
 
 ---------
 
