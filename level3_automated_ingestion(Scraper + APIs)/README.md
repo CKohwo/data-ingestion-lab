@@ -31,7 +31,7 @@ data-ingestion-lab/
 │   ├── api_sources.json           # List of public or structured API endpoints
 │   ├── jumia_config.py            # Site-specific scraping configs (selectors, headers)
 │
-├── level3_automated_ingestion(Scraper+ APIs)/
+├── level3_automated_hybrid_ingestion/
 │   ├── automated_scraper.py       # Carries out the html webscraping  
 │   ├── api_ingestor.py            # API ingestion script 
 │   ├── scraper_dataset.csv        # Auto-generated scraper dataset
@@ -95,7 +95,7 @@ Commits new data to the repository automatically.
 
 - **Configuration** — Define endpoints in categories.json (HTML) and api_sources.json (API).
 
-- **Run Locally (optional)** — python level3_automated_ingestion(Scraper + APIs)/automated_scraper.py or python level3_automated_ingestion(Scraper + APIs)/api_ingestor.py
+- **Run Locally (optional)** — python level3_automated_hybrid_ingestion/automated_scraper.py or python level3_automated_hybrid_ingestion/api_ingestor.py
  
 - **Automated Mode (default)** — GitHub Actions triggers ingestion every 5 days, executing both engines and committing updates automatically.
 
