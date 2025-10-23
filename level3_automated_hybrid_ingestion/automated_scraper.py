@@ -18,7 +18,7 @@ from core.scraper_engine import fetch_all_products
 from sites.jumia_config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = "level3_automated_ingestion(Scraper + APIs)/scraper_dataset.csv" 
+DATA_PATH = "level3_automated_hybrid_ingestion/scraper_dataset.csv" 
 CATEGORY_FILE = Path("sites/categories.json")
 
 # === GIT COMMIT FUNCTION === #

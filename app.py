@@ -10,8 +10,8 @@ from datetime import datetime, timedelta
 ROOT_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.append(str(ROOT_DIR))
-if str(ROOT_DIR / "level3_automated_ingestion(Scraper + APIs)") not in sys.path:
-    sys.path.append(str(ROOT_DIR / "level3_automated_ingestion(Scraper + APIs)"))
+if str(ROOT_DIR / "level3_automated_hybrid_ingestion") not in sys.path:
+    sys.path.append(str(ROOT_DIR / "level3_automated_hybrid_ingestion"))
 if str(ROOT_DIR / "core") not in sys.path:
     sys.path.append(str(ROOT_DIR / "core"))
 if str(ROOT_DIR / "sites") not in sys.path:
@@ -24,7 +24,7 @@ from level3_automated_ingestion(Scraper + APIs).automated_scraper import run_ing
 app = Flask(__name__)
 
 EXPECTED_SECRET = os.environ.get("SCRAPE_SECRET")  # set this in Replit Secrets
-LAST_RUN_FILE = ROOT_DIR / "level3_automated_ingestion(Scraper + APIs)" / "last_run.json"
+LAST_RUN_FILE = ROOT_DIR / "level3_automated_hybrid_ingestion"/ "last_run.json"
 RUN_INTERVAL_DAYS = 5  # minimum gap between scrapes
 
 thread_lock = threading.Lock()
