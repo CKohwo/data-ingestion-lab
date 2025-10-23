@@ -80,7 +80,7 @@ Commits new data to the repository automatically.
  --------
 
 ## DATA-FLOW
-diff
+```bash
 
 +--------------------+
 | GitHub Actions     |
@@ -97,7 +97,7 @@ diff
 | Dataset Repository   |
 | (CSV auto-updates)   |
 +----------------------+
-
+```
 ---------
 
 ## 🛠️ Tech Stack
