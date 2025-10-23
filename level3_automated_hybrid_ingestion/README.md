@@ -78,11 +78,14 @@ Executes both ingestion scripts sequentially.
 
 Commits new data to the repository automatically.
  --------
+
 ## DATA-FLOW
+diff
+
 +--------------------+
 | GitHub Actions     |
 | (Scheduler: 5 days)|
-+--------------------+
++--------------------+ 
            |
 +--------------------+
 | Automated Ingestor |
