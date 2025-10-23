@@ -18,7 +18,7 @@ from core.scraper_engine import fetch_all_products
 from sites.jumia_config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = "level3_automated_ingestion/master_dataset.csv" 
+DATA_PATH = "level3_automated_ingestion(Scraper + APIs)/scraper_dataset.csv" 
 CATEGORY_FILE = Path("sites/categories.json")
 
 # === GIT COMMIT FUNCTION === #
@@ -48,7 +48,7 @@ def commit_data_to_git():
             print("✅ No changes to commit.")
             return
 
-        commit_msg = f"DATA: Auto-update master dataset {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+        commit_msg = f"DATA: Auto-update scraper dataset {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
         subprocess.run(["git", "commit", "-m", commit_msg], check=True)
 
         # Pull with rebase to avoid simple conflicts, then push
@@ -56,7 +56,7 @@ def commit_data_to_git():
         subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
         subprocess.run(["git", "push", repo_remote, "HEAD:main"], check=True)
 
-        print("✅ Successfully pushed master_dataset.csv to GitHub.")
+        print("✅ Successfully pushed scraper_dataset.csv to GitHub.")
 
     except subprocess.CalledProcessError as e:
         print(f"❌ Git command failed: {e}")
@@ -68,7 +68,7 @@ def commit_data_to_git():
 
     
 """This function runs a full ingestion cycle across all categories in categories.json
-Appends timestamp + category columns and merges with master dataset if present or creates a new one.""" 
+Appends timestamp + category columns and merges with scraper dataset if present or creates a new one.""" 
  
 
 def run_ingestion_cycle():
@@ -112,12 +112,12 @@ def run_ingestion_cycle():
             existing_df = pd.read_csv(DATA_PATH)
             combined_df = pd.concat([existing_df, new_data], ignore_index=True)
         else:
-            print("🆕 No existing dataset found — creating new master dataset...")
+            print("🆕 No existing dataset found — creating new scraper dataset...")
             combined_df = new_data
 
         # Save updated dataset
         combined_df.to_csv(DATA_PATH, index=False)
-        print(f"💾 Updated master dataset saved → {DATA_PATH}\n")
+        print(f"💾 Updated scraper dataset saved → {DATA_PATH}\n")
         print("🕒 Ingestion cycle completed successfully.")
 
     except Exception as e:
