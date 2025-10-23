@@ -11,7 +11,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.append(str(ROOT_DIR))
 if str(ROOT_DIR / "level3_automated_ingestion(Scraper + APIs)") not in sys.path:
-    sys.path.append(str(ROOT_DIR / "level3_automated_ingestion(Scraping + APIs)"))
+    sys.path.append(str(ROOT_DIR / "level3_automated_ingestion(Scraper + APIs)"))
 if str(ROOT_DIR / "core") not in sys.path:
     sys.path.append(str(ROOT_DIR / "core"))
 if str(ROOT_DIR / "sites") not in sys.path:
