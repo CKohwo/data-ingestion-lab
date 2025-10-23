@@ -1,17 +1,21 @@
-🧠 Level 3 – Automated Hybrid Ingestion (Scraper + API)
+## 🧠 Level 3 – Automated Hybrid Ingestion (Scraper + API)
 
 This level marks the evolution from a simple HTML crawler into a hybrid, autonomous ingestion system — capable of fetching data from both web sources (HTML scraping) and structured APIs, then intelligently produces a refreshing datasets on a fixed schedule.
 
 The automation pipeline runs every 5 days via GitHub Actions, fetches and delivers data from multiple ingestion layers, and commits updates directly to this repository — creating a continuously self-refreshing data engine.
 
-⚙️ Core Concept
+--------
+
+## ⚙️ Core Concept
 
 Objective:
 Design a self-sustaining ingestion pipeline that intelligently blends web scraping (for data without APIs) and API-based retrieval (for structured or rate-limited data) into a two distinct dataset.
 
 At this stage, the system demonstrates true autonomy and resilience — updating itself without manual triggers, managing versioned data persistence, and maintaining a living dataset repository.
 
-This is a key milestone toward a fully orchestrated ingestion engine (Level 5).
+This is a key milestone toward a fully orchestrated ingestion engine (Level 4).
+
+----------
 
 🧩 Project Structure
 data-ingestion-lab/
@@ -37,7 +41,9 @@ data-ingestion-lab/
     └── workflows/
         └── auto_ingest.yml        # Scheduler (GitHub Actions)
 
-🧠 Workflow Logic
+------------
+
+## 🧠 Workflow Logic
 1. Ingestion Engines
 
 scraper_engine.py — Handles HTML-based extraction via BeautifulSoup and requests.
@@ -70,28 +76,35 @@ Executes the orchestrator.
 
 Commits new data to the repository automatically.
 
-🛠️ Tech Stack
-Component	Purpose
-Python 3.x	Core automation language
-Requests	HTTP requests for both API + HTML ingestion
-BeautifulSoup (lxml)	HTML parsing
-Pandas	Data transformation, merging, deduplication
-JSON	Configuration for endpoints and API mappings
-GitHub Actions	CI/CD automation & scheduling
-🚀 How It Works
+---------
 
-Configuration — Define endpoints in categories.json (HTML) and api_sources.json (API).
+## 🛠️ Tech Stack
+**Component	Purpose**
+- Python 3.x	Core automation language
+- Requests	HTTP requests for both API + HTML ingestion
+- BeautifulSoup (lxml)	HTML parsing
+- Pandas	Data transformation, merging, deduplication
+- JSON	Configuration for endpoints and API mappings
+- GitHub Actions	CI/CD automation & scheduling
 
-Run Locally (optional) —
+----------
+
+## 🚀 How It Works
+
+- Configuration — Define endpoints in categories.json (HTML) and api_sources.json (API).
+
+- Run Locally (optional) —
 
 python level3_automated_ingestion(Scraper + APIs)/automated_scraper.py
 or
 python level3_automated_ingestion(Scraper + APIs)/api_ingestor.py
  
-Automated Mode (default) —
+- Automated Mode (default) —
 GitHub Actions triggers ingestion every 5 days, executing both engines and committing updates automatically.
 
-📈 Expected Output
+--------
+
+## 📈 Expected Output
 
 ✅ Unified ingestion pipeline (API + Scraper)
 ✅ Two different dataset refreshed automatically
@@ -99,10 +112,11 @@ GitHub Actions triggers ingestion every 5 days, executing both engines and commi
 ✅ Version-controlled, self-sustaining data pipeline
 ✅ Scalable architecture for future orchestration (Level 5)
 
-🧭 Next Step: Level 4 – Orchestrated Intelligence
+
+## 🧭 Next Step: Level 4 – Orchestrated Intelligence
 
 The next level transitions from hybrid ingestion to orchestration and insight automation, where the system doesn’t just collect data — it interprets, summarizes, and generates human-readable analytical insights automatically.
 
-Author: Charles Onokohwomo
+**Author: Charles Onokohwomo**
 Phase: Level 3 – Automated Hybrid Ingestion
 Project: Data Ingestion Lab (ADIP Series)
