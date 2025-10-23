@@ -82,21 +82,26 @@ Commits new data to the repository automatically.
 ## DATA-FLOW
 ```bash
 
-+--------------------+
-| GitHub Actions     |
-| (Scheduler: 5 days)|
-+--------------------+ 
-           |
-+--------------------+
-| Automated Ingestor |
-|  ├── api_engine.py |
-|  └── scraper_engine.py |
-+--------------------+
-           |
-+----------------------+
-| Dataset Repository   |
-| (CSV auto-updates)   |
-+----------------------+
++-------------------------------+
+| 🧠 GitHub Actions Scheduler   |
+| Runs every 5 days             |
+| Executes api_ingestor.py      |
+| Commits api_dataset.csv       |
++---------------+---------------+
+                |
+                v
++-------------------------------+
+| 🕸️ Render + UptimeRobot       |
+| Runs periodically or pinged   |
+| Executes automated_scraper.py |
+| Commits scraper_dataset.csv   |
++-------------------------------+
+
+Both feed separate CSV datasets in the repo:
+
+level3_automated_hybrid_ingestion/
+├── api_dataset.csv
+├── scraper_dataset.csv
 ```
 ---------
 
