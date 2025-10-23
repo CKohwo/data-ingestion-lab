@@ -15,10 +15,10 @@ if str(ROOT) not in sys.path:
 
 # === IMPORTS === #
 from core.scraper_engine import fetch_all_products  
-from sites.jumia_config import headers, selector 
+from sites.config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = "level3_automated_hybrid_ingestion/scraper_dataset.csv" 
+DATA_PATH = Path(__file__).resolve().parents[1] / "level3_automated_hybrid_ingestion" / "scraper_dataset.csv"
 CATEGORY_FILE = Path("sites/categories.json")
 
 # === GIT COMMIT FUNCTION === #
@@ -40,6 +40,7 @@ def commit_data_to_git():
         subprocess.run(["git", "config", "--global", "user.email", "bot@adip.io"], check=True)
 
         # Stage file
+        subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
         subprocess.run(["git", "add", str(DATA_PATH)], check=True)
 
         # Check if there is anything to commit
@@ -53,7 +54,6 @@ def commit_data_to_git():
 
         # Pull with rebase to avoid simple conflicts, then push
         # Use repo_remote as the temporary remote to authenticate push
-        subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
         subprocess.run(["git", "push", repo_remote, "HEAD:main"], check=True)
 
         print("✅ Successfully pushed scraper_dataset.csv to GitHub.")
@@ -83,7 +83,7 @@ def run_ingestion_cycle():
     # Loop through all categories
     for category, url in categories.items():
         try:
-            print(f"🔍 Scraping category: {category}") 
+            print(f"[{datetime.utcnow()} UTC] 🔍 Scraping category: {category}") 
 
             # Call our reusable core engine
             category_data = fetch_all_products(url, headers, selector)
@@ -109,7 +109,7 @@ def run_ingestion_cycle():
     # If master_dataset exists, append
     try:
         if os.path.exists(DATA_PATH) and os.path.getsize(DATA_PATH) > 0:
-            existing_df = pd.read_csv(DATA_PATH)
+            existing_df = pd.read_csv(DATA_PATH) # If files has bad and malfunctioned line, i will add on_bad_lines='skip'  
             combined_df = pd.concat([existing_df, new_data], ignore_index=True)
         else:
             print("🆕 No existing dataset found — creating new scraper dataset...")
@@ -128,3 +128,4 @@ def run_ingestion_cycle():
 if __name__ == "__main__":
     run_ingestion_cycle() 
     commit_data_to_git()
+    print(f"[{datetime.utcnow()} UTC] ✅ Git push completed successfully.\n")

@@ -1,4 +1,4 @@
-name: 🧠 Automated Ingestion Cycle
+name: 🧠 API Auto-Ingestion
 
 on:
   schedule:
@@ -7,28 +7,14 @@ on:
   workflow_dispatch:  # allows manual triggering from GitHub UI
 
 jobs:
-  run-ingestion:
+  api-ingestion:
+    name : 🚀 Run API Ingestion job
     runs-on: ubuntu-latest
 
     steps:
       - name: 🧩 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🐍 Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: 📦 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: 🚀 Run ingestion script
-        run: |
-          set -e
-          python level3_automated_ingestion/automated_scraper.py || echo "⚠️ Script failed gracefully"
-          
       - name: 💾 Cache pip dependencies
         uses: actions/cache@v4
         with:
@@ -36,7 +22,23 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-     
+        
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+           
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🚀 Run API Ingestion
+        run: |
+          set -e
+          python level3_automated_hybrid_ingestion/api_ingestor.py || (echo "⚠️ Script failed gracefully" && exit 0)
+          
+       
       - name: 🕵️ Debug output
         run: |
           echo "=== Repo structure ==="
@@ -46,10 +48,10 @@ jobs:
             
       - name: 💾 Commit updated dataset
         run: |
-          git config --global user.name "data-ingestion[bot]"
-          git config --global user.email "data-ingestion[bot]@users.noreply.github.com"
-          git add level3_automated_ingestion/master_dataset.csv
-          git commit -m "🧠 Auto-Data-ingestion update: $(date)" || echo "No changes to commit"
+          git config --global user.name "api-ingestion[bot]"
+          git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
+          git add level3_automated_hybrid_ingestion/api_dataset.csv
+          git commit -m "🧠 API-Data-ingestion update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
           GT_TOKEN: ${{ secrets.GT_TOKEN }}
