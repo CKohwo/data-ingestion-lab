@@ -60,24 +60,37 @@ categories.json — Defines multiple category endpoints for web scraping.
 
 api_sources.json — Lists active API sources (e.g., exchange rates, products, market data).
 
-jumia_config.py — Custom rules for scraping (headers, base URLs, selectors).
+config.py — Custom rules for scraping (headers, base URLs, selectors).
 
-Example:
+3. Automation & Scheduling
 
-{
-  "laptops": "https://www.jumia.com.ng/laptops/",
-  "gaming": "https://www.jumia.com.ng/gaming/",
-  "accessories": "https://www.jumia.com.ng/computing-accessories/"
-}
+API Ingestion: Executes via GitHub Actions every 5 days. Lightweight, predictable, and version-controlled.
+
+HTML Scraper: Hosted on Render, triggered automatically by UptimeRobot pings to maintain dataset freshness without relying on paid background workers.
  
-3. Automation Layer (GitHub Actions)
+```bash
 
-Runs every 5 days on a fixed cron schedule.
++-------------------------------+
+| 🧠 GitHub Actions Scheduler   |
+| Runs every 5 days             |
+| Executes api_ingestor.py      |
+| Commits api_dataset.csv       |
++---------------+---------------+
+                |
+                v
++-------------------------------+
+| 🕸️ Render + UptimeRobot       |
+| Runs periodically or pinged   |
+| Executes automated_scraper.py |
+| Commits scraper_dataset.csv   |
++-------------------------------+
 
-Executes both ingestion scripts sequentially.
+Both feed separate CSV datasets in the repo:
 
-Commits new data to the repository automatically.
-
+level3_automated_hybrid_ingestion/
+├── api_dataset.csv
+├── scraper_dataset.csv
+```
 ---------
 
 ## 🛠️ Tech Stack
