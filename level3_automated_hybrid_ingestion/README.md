@@ -60,23 +60,13 @@ categories.json — Defines multiple category endpoints for web scraping.
 
 api_sources.json — Lists active API sources (e.g., exchange rates, products, market data).
 
-jumia_config.py — Custom rules for scraping (headers, base URLs, selectors).
+config.py — Custom rules for scraping (headers, base URLs, selectors).
 
-Example:
+3. Automation & Scheduling
 
-{
-  "laptops": "https://www.jumia.com.ng/laptops/",
-  "gaming": "https://www.jumia.com.ng/gaming/",
-  "accessories": "https://www.jumia.com.ng/computing-accessories/"
-}
- 
-3. Automation Layer (GitHub Actions)
+API Ingestion: Executes via GitHub Actions every 5 days. Lightweight, predictable, and version-controlled.
 
-Runs every 5 days on a fixed cron schedule.
-
-Executes both ingestion scripts sequentially.
-
-Commits new data to the repository automatically.
+HTML Scraper: Hosted on Render, triggered automatically by UptimeRobot pings to maintain dataset freshness without relying on paid background workers.
  
 ```bash
 
