@@ -1,5 +1,6 @@
 from flask import Flask
 import threading
+import os
 from level3_automated_hybrid_ingestion.automated_scraper import run_ingestion_cycle, commit_data_to_git
 
 app = Flask(__name__)
