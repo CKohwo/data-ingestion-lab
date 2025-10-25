@@ -35,12 +35,25 @@ def commit_data_to_git():
         # Build a pushable repo URL containing token (temporary, only used for push)
         repo_remote = f"https://{GT_TOKEN}@github.com/CKohwo/data-ingestion-lab.git"
 
-        # Configure git identity
+        # Change directory to the repo root. This is essential.
+        # Make sure ROOT is correctly defined earlier in your script.
+        os.chdir(str(ROOT))
+        
+        print("Configure git identity")
         subprocess.run(["git", "config", "--global", "user.name", "DataIngestor-bot"], check=True)
         subprocess.run(["git", "config", "--global", "user.email", "bot@adip.io"], check=True)
 
         # Stage file
+        print("Stashing local changes...")
+        subprocess.run(["git", "stash"], check=True)
+        
+        print("Pulling latest changes from main...")
         subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
+        
+        # 3. Re-apply our stashed changes (the new CSV is back)
+        print("Popping stashed changes...")
+        subprocess.run(["git", "stash", "pop"], check=True)
+
         subprocess.run(["git", "add", str(DATA_PATH)], check=True)
 
         # Check if there is anything to commit
@@ -60,6 +73,10 @@ def commit_data_to_git():
 
     except subprocess.CalledProcessError as e:
         print(f"❌ Git command failed: {e}")
+        if e.stdout:
+            print(f"STDOUT: {e.stdout.decode()}")
+        if e.stderr:
+            print(f"STDERR: {e.stderr.decode()}")
     except Exception as e:
         print(f"❌ Unexpected error during git commit: {e}")
 
