@@ -50,9 +50,18 @@ web-intelligence-ingestion-lab/
 
 - **v1.0.0** — Level 1: Single-page static scraper 
 - **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
-- **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
-- **v4.0.0** — Level 4: API + Web hybrid ingestion
+- **v3.0.0** — Level 3: Hybrid Automated ingestion cycles (scheduled scraping)
+- **v4.0.0** — Level 4: API ingestion Engine
 - **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
+
+            +------------------------------+
+            |     Unified Ingestion Layer  |
+            +------------------------------+
+             /           |           \
+   [API Connector]  [Scraper Engine]  [Playwright Headless Layer]
+        ↓                 ↓                  ↓
+     Clean JSON → Standard Schema → Pandas/DB → ADIP Analytics Engine
+  
 
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
