@@ -54,6 +54,7 @@ web-intelligence-ingestion-lab/
 - **v4.0.0** — Level 4: API ingestion Engine
 - **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
+```
             +------------------------------+
             |     Unified Ingestion Layer  |
             +------------------------------+
@@ -62,7 +63,7 @@ web-intelligence-ingestion-lab/
         ↓                 ↓                  ↓
      Clean JSON → Standard Schema → Pandas/DB → ADIP Analytics Engine
   
-
+```
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
 A relentless pursuer of mastery in automation, intelligence engineering, and data systems design.
