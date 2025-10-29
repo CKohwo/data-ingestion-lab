@@ -1,4 +1,4 @@
-## 🧠 Level 3 – Automated Hybrid Ingestion (Scraper + API)
+## 🧠 Level 3 – Automated Ingestion cycles (Scheduled Scrapper)
 
 This level marks the evolution from a simple HTML crawler into a hybrid, autonomous ingestion system — capable of fetching data from both web sources (HTML scraping) and structured APIs, then intelligently produces a refreshing datasets on a fixed schedule.
 
