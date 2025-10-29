@@ -18,7 +18,7 @@ from core.scraper_engine import fetch_all_products
 from sites.config import headers, selector 
 
 # === CONFIGURATIONS === #
-DATA_PATH = Path(__file__).resolve().parents[1] / "level3_automated_hybrid_ingestion" / "scraper_dataset.csv"
+DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "scraper_dataset.csv"
 CATEGORY_FILE = Path("sites/categories.json")
 
 # === GIT COMMIT FUNCTION === #
