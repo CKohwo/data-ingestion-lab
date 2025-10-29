@@ -20,7 +20,7 @@ Each phase is a reflection of deeper system design thinking:
 - Level 1 -	Single-page web scraper (static extraction)
 - Level 2 -	Multi-page crawler (pagination & traversal)
 - Level 3	-	Automated ingestion cycles (scheduled data refresh)
-- Level 4	-	Hybrid ingestion (Scraping + APIs)
+- Level 4	-	API Ingestion Engine
 - Level 5	-	Full orchestration (autonomous ingestion engine)
 
 This structure mirrors the way intelligent systems evolve: from reactive scripts to self-sustaining data organisms.
