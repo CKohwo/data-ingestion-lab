@@ -13,11 +13,11 @@ CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "API_dataset.csv"
   
 # Function to safely get data from API with retries 
 
-def safe_get(url, retries=4, delay=4):
+def safe_get(URL, retries = 4, delay = 4): 
     #retries--The maximum number of attempts the function will make.
     #delay--The number of seconds the script will pause before making the next attempt.
     
-    for attempt in range(1, retries+1):
+    for attempt in range(retries):
         try:
             print(f"🌐 Attemp=t {attempt}: Fetching data from {URL}") 
             response = requests.get(URL, timeout = 10, verify=True)

@@ -36,7 +36,7 @@ jobs:
       - name: 🚀 Run API Ingestion
         run: |
           set -e
-          python level3_automated_hybrid_ingestion/api_ingestor.py || (echo "⚠️ Script failed gracefully" && exit 0)
+          python level4_api_ingestion_engine/api_ingestor.py || (echo "⚠️ Script failed gracefully" && exit 0)
           
        
       - name: 🕵️ Debug output
@@ -50,7 +50,7 @@ jobs:
         run: |
           git config --global user.name "api-ingestion[bot]"
           git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
-          git add level3_automated_hybrid_ingestion/api_dataset.csv
+          git add data/API_dataset.csv
           git commit -m "🧠 API-Data-ingestion update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
