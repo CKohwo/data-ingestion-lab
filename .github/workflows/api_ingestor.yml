@@ -36,7 +36,7 @@ jobs:
       - name: 🚀 Run API Ingestion
         run: |
           set -e
-          python level4_api_ingestion_engine/api_ingestor.py || (echo "⚠️ Script failed gracefully" && exit 0)
+          python level4_api_ingestion_engine/api_ingestor.py  
           
        
       - name: 🕵️ Debug output
