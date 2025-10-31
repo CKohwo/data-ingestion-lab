@@ -45,6 +45,18 @@ jobs:
           ls -R
           echo "=== Git status ==="
           git status
+
+      - name: 🔍 Check GitHub Token Permissions
+        run: |
+          echo "Testing token access..."
+          git config --global user.name "api-ingestion[bot]"
+          git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
+          echo "Adding test file"
+          echo "test run at $(date)" > test_commit.txt
+          git add test_commit.txt
+          git commit -m "Test commit to verify token permissions"
+          git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          
             
       - name: 💾 Commit updated dataset
         run: |
