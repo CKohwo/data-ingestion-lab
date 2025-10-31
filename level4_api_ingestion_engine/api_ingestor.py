@@ -68,6 +68,7 @@ def normalize_products(data):
             continue
 
     df = pd.DataFrame(records)
+    df['fetched_at'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     print(f"✅ Normalized {len(df)} products into a clean DataFrame.")
     return df
 
@@ -82,11 +83,9 @@ def save_to_csv(df, CSV_PATH):
             combined_df = pd.concat([existing_df, df], ignore_index=True)
          # The Procudt id is used for mapping individual iitems, we can 
          # drop duplicates based on ProductID (if it exists)
-            if "ProductID" in combined_df.columns:
-                combined_df.drop_duplicates(subset="ProductID", inplace=True)
-            
+             
             combined_df.to_csv(CSV_PATH, index=False)
-            print(f"💾 Data appended & deduplicated successfully to {CSV_PATH}")
+            print(f"💾 Data appended & saved successfully to {CSV_PATH}")
         else:
             df.to_csv(CSV_PATH, index=False)
             print(f"💾 New CSV created at {CSV_PATH}")
