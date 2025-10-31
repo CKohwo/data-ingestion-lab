@@ -45,7 +45,16 @@ jobs:
           ls -R
           echo "=== Git status ==="
           git status
-        
+     
+      - name: 🧠 Inspect generated data
+        run: |
+          echo "=== Checking data folder ==="
+          ls -l data/
+          echo "=== Head of the CSV file ==="
+          head -n 5 data/API_dataset.csv || echo "⚠️ CSV file not found"
+          echo "=== Git diff ==="
+          git diff --stat
+   
       - name: 💾 Commit updated dataset
         run: |
           git config --global user.name "api-ingestion[bot]"
