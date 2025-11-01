@@ -8,7 +8,7 @@ from datetime import datetime
 
 URL = "https://dummyjson.com/products"
 
-CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "API_dataset.csv"
+CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "ecommerce_api_dataset.csv"
 
   
 # Function to safely get data from API with retries 
@@ -115,5 +115,4 @@ if __name__ == "__main__":
     df = normalize_products(data) 
     if not df.empty:
         save_to_csv(df, CSV_PATH)
-    
- 
+     
