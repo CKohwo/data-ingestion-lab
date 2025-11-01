@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 
-URL = "https://fakestoreapi.com/products"
+URL = "https://dummyjson.com/products"
 
 CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "API_dataset.csv"
 
@@ -24,7 +24,7 @@ def safe_get(URL, retries = 4, delay = 4):
 
             if response.status_code == 200:
                 print("All is well...data fetched successfully!")
-                return response.json()
+                return response.json() # Return the JSON data as a Python dictionary
             
             else:
                 print(f"⚠️ Received status code {response.status_code}, retrying...")
@@ -48,19 +48,34 @@ def normalize_products(data):
         return pd.DataFrame()  # Return empty DataFrame
     
     records = []
-    for item in data:
+    for item in data.get("products", []):
         try:
             record = {
                 "ProductID": item.get("id"),
                 "Title": item.get("title"),
-                "Price": item.get("price"),
+                "Description": item.get("description"), 
                 "Category": item.get("category"),
-                "Rating": item.get("rating", {}).get("rate"),
-                "Rating_count": item.get("rating", {}).get("count"),
-                "Description": item.get("description"),
+                "Price": item.get("price"),
+                "discountPercentage": item.get("discountPercentage"),
+                "Rating": item.get("rating"),
+                "Stock": item.get("stock"),
+                "Tags": ", ".join(item.get("tags", [])),
+                "Brand": item.get("brand"),
+                "SKU": item.get("sku"),
+                "weight": item.get("weight"),
+                "Dimensions": item.get("dimensions"),
+                "warranty": item.get("warrantyInformation"),
+                "Shiiping_Info": item.get("shippingInformation"),
+                "Availability": item.get("availabilityStatus"),
+                "Reviews": item.get("reviews"),
+                "ReturnPolicy": item.get("returnPolicy"),
+                "Meta_Keywords": item.get("meta"),
+                "Barcode": item.get("barcode"),
+                "qrCode": item.get("qrCode"),
                 "ImageURL": item.get("image"),
+                "ThumbnailURL": item.get("thumbnail"),
                 "Timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
-                "Source": "FakeStoreAPI"
+                "Source": "dummyjson.com"
             }
             records.append(record)
         except Exception as e:
