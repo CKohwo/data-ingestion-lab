@@ -123,9 +123,7 @@ def save_data(new_df, DATA_PATH=DATA_PATH):
         
         # Remove duplicates, keeping the latest timestamp for each city
         # This is critical for time-series data
-        combined_df = combined_df.sort_values('Timestamp_UTC', ascending=False).drop_duplicates(
-            subset=['City', 'Country'], keep='first'
-        ).sort_index()
+        combined_df = combined_df.sort_values('Timestamp_UTC', ascending=False).sort_index()
 
         combined_df.to_csv(DATA_PATH, index=False)
         print(f"\n--- 💾 Success: Data saved to {DATA_PATH} ---")
