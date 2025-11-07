@@ -1,4 +1,4 @@
-name: 🧠 ECOSYSTEM API AUTO-INGESTION
+name: 🧠 Ecosystem API Auto-Ingestion
 
 on:
   schedule:
@@ -61,6 +61,6 @@ jobs:
           git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
           git add data/ecommerce_api_dataset.csv
           git commit -m "🧠 API-Data-ingestion update: $(date)" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          git push https://x-access-token:${{ secrets.WEATHER_API_KEY}}@github.com/${{ github.repository }} HEAD:main
         env:
-          GT_TOKEN: ${{ secrets.GT_TOKEN }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY}}
