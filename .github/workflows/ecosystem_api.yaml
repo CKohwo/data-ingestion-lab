@@ -40,6 +40,11 @@ jobs:
 
         run: |
           set -e
+          
+          echo "--- DEBUG: Checking for secret ---"
+          python -c "import os; print(f'The secret value is: {os.getenv(\"WEATHER_API_KEY\")}' )"
+          echo "--- END DEBUG ---"      
+
           python level4_api_ingestion_engine/ecosystem_api.py  
           
        
@@ -63,7 +68,7 @@ jobs:
         run: |
           git config --global user.name "api-ingestion[bot]"
           git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
-          git add data/ecommerce_api_dataset.csv
+          git add data/ecommerce_dataset.csv
           git commit -m "🧠 API-Data-ingestion update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN}}@github.com/${{ github.repository }} HEAD:main
         env:
