@@ -1,14 +1,4 @@
 City,Country,Latitude,Longitude,Timestamp_UTC,Temperature_C,Wind_KPH,Condition,AQI_US,CO,NO2,O3,PM2.5
-Casablanca,Morocco,33.5931,-7.6164,1762477200,17.6,14.8,Partly Cloudy,1,159.85,17.75,50.0,12.95
-Kampala,Uganda,0.3156,32.5656,1762477200,17.4,3.6,Patchy rain nearby,3,774.85,15.65,41.0,55.75
-Lagos,Nigeria,6.4531,3.3958,1762479000,27.2,13.3,Clear,3,1673.85,39.55,18.0,42.85
-Accra,Ghana,5.55,-0.2167,1762479000,26.4,10.4,Partly Cloudy,1,412.85,11.05,32.0,6.65
-Nairobi,Kenya,-1.2833,36.8167,1762479000,15.6,10.4,Clear,1,258.85,12.15,29.0,12.85
-Johannesburg,South Africa,-26.2,28.0833,1762478100,15.6,12.6,Patchy rain nearby,2,232.85,29.15,74.0,30.85
-Cairo,Egypt,30.05,31.25,1762477200,21.0,6.5,Clear,3,488.85,65.55,1.0,41.65
-Addis Ababa,Ethiopia,9.0333,38.7,1762479000,11.6,3.6,Clear,2,456.85,14.25,41.0,36.55
-Dar Es Salaam,Tanzania,-6.8,39.2833,1762477200,24.7,7.9,Patchy rain nearby,1,106.85,6.15,24.0,8.85
-Algiers,Algeria,36.7631,3.0506,1762479000,17.7,17.3,Patchy rain nearby,1,136.85,10.35,70.0,5.85
 Lagos,Nigeria,6.4531,3.3958,1762479900,26.0,13.3,Patchy light rain with thunder,3,1673.85,39.55,18.0,42.85
 Accra,Ghana,5.55,-0.2167,1762479900,26.3,10.4,Partly Cloudy,1,412.85,11.05,32.0,6.65
 Nairobi,Kenya,-1.2833,36.8167,1762481700,18.0,8.6,Partly cloudy,1,235.85,11.25,28.0,12.95
