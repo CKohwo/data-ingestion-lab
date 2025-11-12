@@ -74,6 +74,11 @@ data-intelligence-ingestion-lab/
      Clean JSON → Standard Schema → Pandas/DB → ADIP Analytics Engine
   
 ```
+## 🎯 Purpose
+
+The **Data Intelligence Ingestion Lab** is a foundational milestone in the broader **ADIP (Automated Data Intelligence Platform)** architecture.  
+It demonstrates the evolution of autonomous data pipelines capable of ingesting, cleaning, and unifying multi-source information — forming the core of adaptive, intelligent systems.
+
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
 A relentless pursuer of mastery in automation, intelligence engineering, and data systems design.
