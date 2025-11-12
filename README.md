@@ -16,12 +16,13 @@ Each level represents a **functional evolution** — where logic, automation, an
 
 Each phase is a reflection of deeper system design thinking:
 
-**Level**	 	**Description**
-- Level 1 -	Single-page web scraper (static extraction)
-- Level 2 -	Multi-page crawler (pagination & traversal)
-- Level 3	-	Automated ingestion cycles (scheduled data refresh)
-- Level 4	-	API Ingestion Engine
-- Level 5	-	Full orchestration (autonomous ingestion engine)
+| **Level**	 |	**Description**   | **Core Skill**  |
+| --------   | -------------------------  | ----------------|
+| Level 1    |  Single-page web scraper (static extraction)           |  HTML parsing, requests, BeautifulSoup           |
+| Level 2    |  Multi-page crawler (pagination & traversal)           | Crawler logic, link traversal                    |
+| Level 3	 |  Automated ingestion cycles (self-refreshing scrapers) | CI/CD automation, GitHub Actions                 |
+| Level 4	 |  API Ingestion Engine                                  | API requests, authentication, JSON normalization |
+| Level 5	 |  Full orchestration (autonomous ingestion engine)      | Multi-source orchestration, data merging         |
 
 This structure mirrors the way intelligent systems evolve: from reactive scripts to self-sustaining data organisms.
 
@@ -30,7 +31,7 @@ This structure mirrors the way intelligent systems evolve: from reactive scripts
 ## 🧩 Repository Structure
 
 ```bash
-web-intelligence-ingestion-lab/
+data-intelligence-ingestion-lab/
 │
 ├── level1_single_page_scraper/
 │   ├── scraper.py
@@ -59,7 +60,7 @@ web-intelligence-ingestion-lab/
 
 - **v1.0.0** — Level 1: Single-page static scraper 
 - **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
-- **v3.0.0** — Level 3: Hybrid Automated ingestion cycles (scheduled scraping)
+- **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
 - **v4.0.0** — Level 4: API ingestion Engine
 - **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
