@@ -45,10 +45,12 @@ web-intelligence-ingestion-lab/
 │   └── __init__.py
 │   └── automated_scraper.py
 │
-├── level4_api_ingestion_engine.py
+├── level4_api_ingestion_engine/
 │   └── __init__.py
 │   └── ecommerce_api.py
 │   └── authentication_api.py 
+│
+├── level5_full_orchestration/
 │
 └── README.md
 ```
@@ -66,8 +68,8 @@ web-intelligence-ingestion-lab/
             |     Unified Ingestion Layer  |
             +------------------------------+
              /           |           \
-   [API Connector]  [Scraper Engine]  [Playwright Headless Layer]
-        ↓                 ↓                  ↓
+   [API Connector]       |      [Scraper Engine]   
+        ↓                ↓              ↓
      Clean JSON → Standard Schema → Pandas/DB → ADIP Analytics Engine
   
 ```
