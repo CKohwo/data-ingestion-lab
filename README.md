@@ -38,10 +38,17 @@ web-intelligence-ingestion-lab/
 │   └── laptop.csv
 │
 ├── level2_multi_page_crawler/
-│   └── (coming soon)
+│   └── multi_page_scraper.py
+│   └── sample.csv
 │
-├── level3_automation_layer/
-│   └── (coming soon)
+├── level3_automated_ingestion_cycles/
+│   └── __init__.py
+│   └── automated_scraper.py
+│
+├── level4_api_ingestion_engine.py
+│   └── __init__.py
+│   └── ecommerce_api.py
+│   └── authentication_api.py 
 │
 └── README.md
 ```
