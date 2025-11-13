@@ -20,7 +20,7 @@ It is part of the broader **Data Ingestion Lab**, a multi-phase system design ex
 ## 🧩 System Architecture
 
 ```bash
-graph TD
+ 
     A[API Endpoint(s)] -->|HTTP Requests| B[Auth Layer (.env)]
     B --> C[API Ingestion Engine]
     C --> D[Data Normalization (pandas)]
