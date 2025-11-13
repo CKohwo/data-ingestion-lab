@@ -1,8 +1,8 @@
 ## 🧠 Level 3 – Automated Ingestion cycles (scheduled data refresh)
 
-This level marks the evolution from a simple HTML crawler into a hybrid, autonomous ingestion system — capable of fetching data from both web sources (HTML scraping) and structured APIs, then intelligently produces a refreshing datasets on a fixed schedule.
+This level marks the evolution from a simple HTML crawler into a autonomous ingestion system — capable of fetching data from different web sources (HTML scraping) and then intelligently produces a refreshing datasets on a fixed schedule.
 
-The automation pipeline runs every 5 days via GitHub Actions, fetches and delivers data from multiple ingestion layers, and commits updates directly to this repository — creating a continuously self-refreshing data engine.
+The automation pipeline runs every 5 days via GitHub Actions & Render, it fetches and delivers data from multiple ingestion layers, and commits updates directly to this repository — creating a continuously self-refreshing data engine.
 
 --------
 
@@ -70,7 +70,7 @@ HTML Scraper: Hosted on Render, triggered automatically by UptimeRobot pings to 
 
 This produces a CSV dataset in the repo:
 
-level3_automated_hybrid_ingestion/
+level3_automated_ingestiion_cycles/
 ├── scraper_dataset.csv 
 ```
 ---------
