@@ -9,11 +9,11 @@ The automation pipeline runs every 5 days via GitHub Actions, fetches and delive
 ## ⚙️ Core Concept
 
 Objective:
-Design a self-sustaining ingestion pipeline that intelligently blends web scraping (for data without APIs) and API-based retrieval (for structured or rate-limited data) into a two distinct dataset.
+Design a self-sustaining ingestion pipeline intelligently fetches data via web scraping (without APIs) into a distinct dataset.
 
 At this stage, the system demonstrates true autonomy and resilience — updating itself without manual triggers, managing versioned data persistence, and maintaining a living dataset repository.
 
-This is a key milestone toward a fully orchestrated ingestion engine (Level 4).
+This is a key milestone toward a fully orchestrated ingestion engine (Level 5).
 
 ----------
 
@@ -24,23 +24,19 @@ data-ingestion-lab/
 ├── core/
 │   ├── __init__.py
 │   ├── scraper_engine.py          # Reusable scraping logic (HTML)
-│   ├── api_engine.py              # Reusable API ingestion logic
+│    
 │
 ├── sites/
 │   ├── categories.json            # Category mapping for scraping endpoints
-│   ├── api_sources.json           # List of public or structured API endpoints
 │   ├── jumia_config.py            # Site-specific scraping configs (selectors, headers)
 │
-├── level3_automated_hybrid_ingestion/
-│   ├── automated_scraper.py       # Carries out the html webscraping  
-│   ├── api_ingestor.py            # API ingestion script 
-│   ├── scraper_dataset.csv        # Auto-generated scraper dataset
-│   ├── api_dataset.csv            # Auto-saved dataset extracted via Api       
+├── level3_automated_ingestion_cycles/
+│   ├── __init__.py        
+│   ├── automated_scraper.py       # Carries out the html webscraping
 │   └── README.md                  # You are here
 │
-└── .github/
-    └── workflows/
-        └── auto_ingest.yml        # Scheduler (GitHub Actions)
+└── render_app.py 
+      
 ```
 
 ------------
@@ -50,32 +46,19 @@ data-ingestion-lab/
 
 scraper_engine.py — Handles HTML-based extraction via BeautifulSoup and requests.
 
-api_engine.py — Pulls structured data from REST APIs, handling pagination and response normalization.
-
-Both engines return standardized DataFrames.  
+This returns a standardized DataFrames.  
 
 2. Configuration Layer
 
 categories.json — Defines multiple category endpoints for web scraping.
-
-api_sources.json — Lists active API sources (e.g., exchange rates, products, market data).
-
+ 
 config.py — Custom rules for scraping (headers, base URLs, selectors).
 
 3. Automation & Scheduling
 
-API Ingestion: Executes via GitHub Actions every 5 days. Lightweight, predictable, and version-controlled.
-
 HTML Scraper: Hosted on Render, triggered automatically by UptimeRobot pings to maintain dataset freshness without relying on paid background workers.
  
-```bash
-
-+-------------------------------+
-| 🧠 GitHub Actions Scheduler   |
-| Runs every 5 days             |
-| Executes api_ingestor.py      |
-| Commits api_dataset.csv       |
-+---------------+---------------+
+```bash 
                 |
                 v
 +-------------------------------+
@@ -85,11 +68,10 @@ HTML Scraper: Hosted on Render, triggered automatically by UptimeRobot pings to 
 | Commits scraper_dataset.csv   |
 +-------------------------------+
 
-Both feed separate CSV datasets in the repo:
+This produces a CSV dataset in the repo:
 
 level3_automated_hybrid_ingestion/
-├── api_dataset.csv
-├── scraper_dataset.csv
+├── scraper_dataset.csv 
 ```
 ---------
 
@@ -100,34 +82,29 @@ level3_automated_hybrid_ingestion/
 - BeautifulSoup (lxml)	HTML parsing
 - Pandas	Data transformation, merging, deduplication
 - JSON	Configuration for endpoints and API mappings
-- GitHub Actions	CI/CD automation & scheduling
+- render
+- flask
 
 ----------
 
 ## 🚀 How It Works
 
-- **Configuration** — Define endpoints in categories.json (HTML) and api_sources.json (API).
+- **Configuration** — Define endpoints in categories.json (HTML)  
 
-- **Run Locally (optional)** — python level3_automated_hybrid_ingestion/automated_scraper.py or python level3_automated_hybrid_ingestion/api_ingestor.py
+- **Run Locally (optional)** — python level3_automated_ingestion_cycles/automated_scraper.py    
  
-- **Automated Mode (default)** — GitHub Actions triggers ingestion every 5 days, executing both engines and committing updates automatically.
+- **Automated Mode (default)** — GitHub Actions triggers the Render cloud (render_app.py) every 5 days, which then carries out the execution, uptime robot pings the render webservice every 5mins to prevent downtime, after successful process run the commits are then automatically saved.
 
 --------
 
 ## 📈 Expected Output
 
-✅ Unified ingestion pipeline (API + Scraper)
-✅ Two different dataset refreshed automatically
-✅ Full automation via GitHub Actions
+✅ Unified ingestion pipeline   
+✅ Full automation via GitHub Actions & Render
 ✅ Version-controlled, self-sustaining data pipeline
 ✅ Scalable architecture for future orchestration (Level 5)
 
-----------
-
-## 🧭 Next Step: Level 4 – Orchestrated Intelligence
-
-The next level transitions from hybrid ingestion to orchestration and insight automation, where the system doesn’t just collect data — it interprets, summarizes, and generates human-readable analytical insights automatically.
------------
+---------- 
 
 ## Author: Charles Onokohwomo 
 
