@@ -10,7 +10,7 @@ API_URL = "https://api.konga.com/v1/graphql"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64), AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
 
 
-CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "ecommerce_api.csv"
+CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "api_ingestor.csv"
 
 # GraphQL query payload
 payload = {

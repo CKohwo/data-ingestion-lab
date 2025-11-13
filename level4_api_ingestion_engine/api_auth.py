@@ -22,7 +22,7 @@ CITY_NAME = ["Nigeria, Lagos", "Ghana, Accra", "Kenya, Nairobi", "South Africa, 
 
 # Base URL for the Weather API & DATA PATH for saving the dataset
 BASE_URL = "http://api.weatherapi.com/v1/current.json" 
-DATA_PATH = Path(__file__).resolve().parents[1] / "data" /"auth_api.csv" 
+DATA_PATH = Path(__file__).resolve().parents[1] / "data" /"api_auth.csv" 
  
 
 # Function to fetch weather data for a given city
