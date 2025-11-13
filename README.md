@@ -16,12 +16,13 @@ Each level represents a **functional evolution** — where logic, automation, an
 
 Each phase is a reflection of deeper system design thinking:
 
-**Level**	 	**Description**
-- Level 1 -	Single-page web scraper (static extraction)
-- Level 2 -	Multi-page crawler (pagination & traversal)
-- Level 3	-	Automated ingestion cycles (scheduled data refresh)
-- Level 4	-	API Ingestion Engine
-- Level 5	-	Full orchestration (autonomous ingestion engine)
+| **Level**	 |	**Description**   | **Core Skill**  |
+| --------   | -------------------------  | ----------------|
+| Level 1    |  Single-page web scraper (static extraction)           |  HTML parsing, requests, BeautifulSoup           |
+| Level 2    |  Multi-page crawler (pagination & traversal)           | Crawler logic, link traversal                    |
+| Level 3	 |  Automated ingestion cycles (self-refreshing scrapers) | CI/CD automation, GitHub Actions                 |
+| Level 4	 |  API Ingestion Engine                                  | API requests, authentication, JSON normalization |
+| Level 5	 |  Full orchestration (autonomous ingestion engine)      | Multi-source orchestration, data merging         |
 
 This structure mirrors the way intelligent systems evolve: from reactive scripts to self-sustaining data organisms.
 
@@ -30,7 +31,7 @@ This structure mirrors the way intelligent systems evolve: from reactive scripts
 ## 🧩 Repository Structure
 
 ```bash
-web-intelligence-ingestion-lab/
+data-intelligence-ingestion-lab/
 │
 ├── level1_single_page_scraper/
 │   ├── scraper.py
@@ -38,10 +39,19 @@ web-intelligence-ingestion-lab/
 │   └── laptop.csv
 │
 ├── level2_multi_page_crawler/
-│   └── (coming soon)
+│   └── multi_page_scraper.py
+│   └── sample.csv
 │
-├── level3_automation_layer/
-│   └── (coming soon)
+├── level3_automated_ingestion_cycles/
+│   └── __init__.py
+│   └── automated_scraper.py
+│
+├── level4_api_ingestion_engine/
+│   └── __init__.py
+│   └── ecommerce_api.py
+│   └── authentication_api.py 
+│
+├── level5_full_orchestration/
 │
 └── README.md
 ```
@@ -50,7 +60,7 @@ web-intelligence-ingestion-lab/
 
 - **v1.0.0** — Level 1: Single-page static scraper 
 - **v2.0.0** — Level 2: Multi-page crawler (pagination traversal)
-- **v3.0.0** — Level 3: Hybrid Automated ingestion cycles (scheduled scraping)
+- **v3.0.0** — Level 3: Automated ingestion cycles (scheduled scraping)
 - **v4.0.0** — Level 4: API ingestion Engine
 - **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
@@ -59,11 +69,16 @@ web-intelligence-ingestion-lab/
             |     Unified Ingestion Layer  |
             +------------------------------+
              /           |           \
-   [API Connector]  [Scraper Engine]  [Playwright Headless Layer]
-        ↓                 ↓                  ↓
+   [API Connector]       |      [Scraper Engine]   
+        ↓                ↓              ↓
      Clean JSON → Standard Schema → Pandas/DB → ADIP Analytics Engine
   
 ```
+## 🎯 Purpose
+
+The **Data Intelligence Ingestion Lab** is a foundational milestone in the broader **ADIP (Automated Data Intelligence Platform)** architecture.  
+It demonstrates the evolution of autonomous data pipelines capable of ingesting, cleaning, and unifying multi-source information — forming the core of adaptive, intelligent systems.
+
 ## 🧠 Author
 Charles — Technologist | Data Scientist | AI Systems Architect
 A relentless pursuer of mastery in automation, intelligence engineering, and data systems design.
