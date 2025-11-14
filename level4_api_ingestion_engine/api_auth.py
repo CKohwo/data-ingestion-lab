@@ -131,7 +131,7 @@ def save_data(new_df, DATA_PATH=DATA_PATH):
 
 
 # == api_auth_ingestor.py == #
-def run_weather_ingestion():
+def run_api_authentication():
     new_df = run_ingestion(CITY_NAME=CITY_NAME)
     if new_df is not None:
         save_data(new_df, DATA_PATH)
@@ -139,4 +139,4 @@ def run_weather_ingestion():
 
 # Main execution function     
 if __name__ == "__main__":
-    run_weather_ingestion()
+    run_api_authentication()
