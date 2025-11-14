@@ -15,7 +15,7 @@ if str(ROOT) not in sys.path:
 
 # === IMPORTS === #
 from core.scraper_engine import fetch_all_products  
-from sites.config import headers, selector 
+from scripts.config import headers, selector 
 
 # === CONFIGURATIONS === #
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "scraper_dataset.csv"

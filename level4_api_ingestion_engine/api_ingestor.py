@@ -4,59 +4,15 @@ import requests
 from pathlib import Path 
 import time
 from datetime import datetime
+from scripts.config import headers, payload
 
 
 API_URL = "https://api.konga.com/v1/graphql"
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64), AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
-
+ 
 
 CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "api_ingestor.csv"
 
-# GraphQL query payload
-payload = {
-  "query": """
-    {
-      searchByStore(
-        search_term: [["category.category_id:5237"]],
-        numericFilters: [],
-        sortBy: "",
-        paginate: {page: 0, limit: 40},
-        store_id: 1
-      ) {
-        pagination {
-          limit
-          page
-          total
-        }
-        products {
-          name
-          brand
-          price
-          deal_price
-          final_price
-          description
-          image_thumbnail
-          sku
-          seller {
-            name
-          }
-          stock {
-            in_stock
-            quantity
-          }
-          product_rating {
-            quality {
-              average
-              number_of_ratings
-            }
-          }
-        }
-      }
-    }
-  """
-}
-
-
+ 
   
 # == CORE FUNCTIONS == #  
 def safe_get(API_URL, retries = 4, delay = 4): 
@@ -66,7 +22,7 @@ def safe_get(API_URL, retries = 4, delay = 4):
     for attempt in range(retries):
         try:
             print(f"🌐 Attemp=t {attempt}: Fetching data from {API_URL}") 
-            response = requests.post(API_URL,headers = headers, json=payload, timeout = 10, verify=True)
+            response = requests.post(API_URL, headers ,json=payload, timeout = 10, verify=True)
 
             response.raise_for_status()
             print("All is well...data fetched successfully!")

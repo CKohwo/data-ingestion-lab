@@ -4,6 +4,7 @@ import json
 import requests
 from dotenv import load_dotenv
 from pathlib import Path
+from scripts.api_config import CITY_NAME
 
 
 # Load environment variables from the (.env) file
@@ -16,10 +17,7 @@ if not API_KEY:
     raise ValueError("⚠️ WEATHER_API_KEY not found in environment variables.")
 
 #This variable stores the list of city names for which weather data is to be fetched
-CITY_NAME = ["Nigeria, Lagos", "Ghana, Accra", "Kenya, Nairobi", "South Africa, Johannesburg"
-             ,"Egypt, Cairo", "Morocco, Casablanca", "Ethiopia, Addis Ababa", "Tanzania, Dar es Salaam"
-             ,"Uganda, Kampala", "Algeria, Algiers"]
-
+ 
 # Base URL for the Weather API & DATA PATH for saving the dataset
 BASE_URL = "http://api.weatherapi.com/v1/current.json" 
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" /"api_auth.csv" 

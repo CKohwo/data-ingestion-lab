@@ -28,7 +28,7 @@ logger = logging.getLogger()
 
 
 # --- Simple job runner with retries + JSON report ---
-def run_job(job_name, job_fn, retries=1, verbose=False):
+def run_job(job_name, job_fn, retries=2, verbose=False):
     start = datetime.utcnow()
     success = False
     error_message = None
