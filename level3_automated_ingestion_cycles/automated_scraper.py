@@ -44,16 +44,10 @@ def commit_data_to_git():
         subprocess.run(["git", "config", "--global", "user.email", "bot@adip.io"], check=True)
 
         # Stage file
-        print("Stashing local changes...")
+        print("🔧 Preparing repository for data commit...")
         subprocess.run(["git", "stash"], check=True)
-        
-        print("Pulling latest changes from main...")
         subprocess.run(["git", "pull", repo_remote, "main", "--rebase"], check=True)
-        
-        # 3. Re-apply our stashed changes (the new CSV is back)
-        print("Popping stashed changes...")
         subprocess.run(["git", "stash", "pop"], check=True)
-
         subprocess.run(["git", "add", str(DATA_PATH)], check=True)
 
         # Check if there is anything to commit
@@ -70,25 +64,18 @@ def commit_data_to_git():
         subprocess.run(["git", "push", repo_remote, "HEAD:main"], check=True)
 
         print("✅ Successfully pushed scraper_dataset.csv to GitHub.")
-
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Git command failed: {e}")
-        if e.stdout:
-            print(f"STDOUT: {e.stdout.decode()}")
-        if e.stderr:
-            print(f"STDERR: {e.stderr.decode()}")
+        return True
+    
     except Exception as e:
         print(f"❌ Unexpected error during git commit: {e}")
+        return False
 
 
 # === INGESTION CYCLE FUNCTION === #
+def run_ingestion_cycle(): 
+    ## This function runs a full ingestion cycle across all categories in categories.json
+    ## Appends timestamp + category columns and merges with scraper dataset if present or creates a new one.
 
-    
-"""This function runs a full ingestion cycle across all categories in categories.json
-Appends timestamp + category columns and merges with scraper dataset if present or creates a new one.""" 
- 
-
-def run_ingestion_cycle():
     print("\n🚀 Starting ingestion cycle...\n")
 
     # Load all categories
@@ -136,13 +123,28 @@ def run_ingestion_cycle():
         combined_df.to_csv(DATA_PATH, index=False)
         print(f"💾 Updated scraper dataset saved → {DATA_PATH}\n")
         print("🕒 Ingestion cycle completed successfully.")
+        return True
 
     except Exception as e:
         print(f"❌ Error during ingestion cycle: {e}")
+        return False
+
+
+
+# === WRAPPER FUNCTION (For Orchestration) === #
+def run_automated_scraper():
+    """High-level callable function for orchestration layer."""
+    print("🔁 Running automated scraper pipeline...")
+    ingestion_status = run_ingestion_cycle()
+    if ingestion_status:
+        git_status = commit_data_to_git()
+        return git_status
+    else:
+        print("❌ Ingestion failed. Skipping Git commit.")
+        return False
 
 
 
 if __name__ == "__main__":
-    run_ingestion_cycle() 
-    commit_data_to_git()
-    print(f"[{datetime.utcnow()} UTC] ✅ Git push completed successfully.\n")
+    run_automated_scraper()
+    print(f"[{datetime.utcnow()} UTC] ✅ Automated scraper pipeline completed.\n")

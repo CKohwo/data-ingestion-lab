@@ -58,7 +58,7 @@ payload = {
 
 
   
-# Function to safely get data from API with retries  
+# == CORE FUNCTIONS == #  
 def safe_get(API_URL, retries = 4, delay = 4): 
     #retries--The maximum number of attempts the function will make.
     #delay--The number of seconds the script will pause before making the next attempt.
@@ -93,40 +93,59 @@ def load(data):
         return pd.DataFrame()  # Return empty DataFrame
 
     # Extract products 
-    df = json.dumps(data, indent=4)
-    products = data["data"]["searchByStore"]["products"]
-    dfs = pd.DataFrame(products)
-    dfs['fetched_at'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"✅ Normalized {len(dfs)} products into a clean DataFrame.")
-    return dfs
+    try:
+      df = json.dumps(data, indent=4)
+      products = data["data"]["searchByStore"]["products"]
+      df = pd.DataFrame(products)
+      df['fetched_at'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+      print(f"✅ Normalized {len(df)} products into a clean DataFrame.")
+      return dfs
+    
+    except Exception as e:
+        print(f"❌ Error during normalization: {e}")
+        return pd.DataFrame()  # Return empty DataFrame on error
 
 
 # Function to save DataFrame to CSV, appending if file exists
-def save_to_csv(dfs, CSV_PATH):
+def save_to_csv(df, CSV_PATH):
     try:
         CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
         if CSV_PATH.exists():
             existing_df = pd.read_csv(CSV_PATH)
-            combined_df = pd.concat([existing_df, dfs], ignore_index=True)
+            combined_df = pd.concat([existing_df, df], ignore_index=True)
          # The Procudt id is used for mapping individual iitems, we can 
          # drop duplicates based on ProductID (if it exists)
              
             combined_df.to_csv(CSV_PATH, index=False)
             print(f"💾 Data appended & saved successfully to {CSV_PATH}")
         else:
-            dfs.to_csv(CSV_PATH, index=False)
+            df.to_csv(CSV_PATH, index=False)
             print(f"💾 New CSV created at {CSV_PATH}")
 
     except Exception as e:
         print(f"❌ Error saving data to CSV: {e}")
         print(f"💾 Data saved to {CSV_PATH}")
+    
      
+def run_api_ingestion():
+    """High-level callable for orchestrator.py"""
+    print("\n🚀 Starting API ingestion process...\n")
+    try:
+        data = safe_get()
+        df = load(data)
+        if df.empty:
+            print("⚠️ No records fetched. Skipping CSV save.")
+            return False
+        save_status = save_to_csv(df)
+        print("✅ API ingestion completed successfully.\n")
+        return save_status
+    except Exception as e:
+        print(f"❌ API ingestion failed: {e}")
+        return False
 
+ 
 if __name__ == "__main__":
-    data = safe_get(API_URL)
-    dfs = load(data) 
-    if not dfs.empty:
-        save_to_csv(dfs, CSV_PATH)
+    run_api_ingestion()
      

@@ -1,14 +1,14 @@
-name: 🧠 Ecosystem API Auto-Ingestion
+name: 🧠 API Authentication Auto-Ingestion
 
 on:
   schedule:
     # Runs every 5 days (at midnight UTC)
-    - cron: "0 0 */1 * *"
+    - cron: "0 0 */2 * *"
   workflow_dispatch:  # allows manual triggering from GitHub UI
 
 jobs:
   api-ingestion:
-    name : 🚀 Run Ecosystem Ingestion Cycles
+    name : 🚀 Run API Auth Ingestion Cycles
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +45,7 @@ jobs:
           python -c "import os; print(f'The secret value is: {os.getenv(\"WEATHER_API_KEY\")}' )"
           echo "--- END DEBUG ---"      
 
-          python level4_api_ingestion_engine/ecosystem_api.py  
+          python level4_api_ingestion_engine/api_auth.py  
           
        
       - name: 🕵️ Debug output
@@ -60,7 +60,7 @@ jobs:
           echo "=== Checking data folder ==="
           ls -l data/
           echo "=== Head of the CSV file ==="
-          head -n 5 data/ecosystem_dataset.csv || echo "⚠️ CSV file not found"
+          head -n 5 data/api_auth.csv || echo "⚠️ CSV file not found"
           echo "=== Git diff ==="
           git diff --stat
    
@@ -68,8 +68,8 @@ jobs:
         run: |
           git config --global user.name "api-ingestion[bot]"
           git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
-          git add data/ecosystem_dataset.csv
-          git commit -m "🧠 API-Data-ingestion update: $(date)" || echo "No changes to commit"
+          git add data/api_auth.csv
+          git commit -m "🧠 API Auth-Data-ingestion update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN}}@github.com/${{ github.repository }} HEAD:main
         env:
           GT_TOKEN: ${{ secrets.GT_TOKEN}}

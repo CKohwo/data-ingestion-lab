@@ -129,9 +129,14 @@ def save_data(new_df, DATA_PATH=DATA_PATH):
         print(f"\n--- 💾 Success: Data saved to {DATA_PATH} ---")
         print(f"Total rows in dataset: {len(combined_df)}")
 
-     
-# Main execution function     
-if __name__ == "__main__":
+
+# == api_auth_ingestor.py == #
+def run_weather_ingestion():
     new_df = run_ingestion(CITY_NAME=CITY_NAME)
     if new_df is not None:
-        save_data(new_df, DATA_PATH)     
+        save_data(new_df, DATA_PATH)
+
+
+# Main execution function     
+if __name__ == "__main__":
+    run_weather_ingestion()
