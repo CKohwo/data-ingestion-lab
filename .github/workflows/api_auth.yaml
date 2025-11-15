@@ -2,13 +2,13 @@ name: 🧠 API Authentication Auto-Ingestion
 
 on:
   schedule:
-    # Runs every 5 days (at midnight UTC)
+    # Runs every 2 days at midnight UTC
     - cron: "0 0 */2 * *"
-  workflow_dispatch:  # allows manual triggering from GitHub UI
+  workflow_dispatch:
 
 jobs:
   api-ingestion:
-    name : 🚀 Run API Auth Ingestion Cycles
+    name: 🚀 Run API Auth Ingestion Cycles
     runs-on: ubuntu-latest
 
     steps:
@@ -22,54 +22,39 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-        
+
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-           
-      - name: 📦 Install dependencies 
+
+      - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-
-      - name: 🚀 Run Ecosystem Ingestion Cycles 
+      - name: 🚀 Run API Weather Ingestion
         env:
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY}}
-
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: |
-          set -e
+          python level5_full_orchestration/orchestrator.py \
+            -job Api_Auth \
+            -verbose \
+            -retries 3
 
-          echo "--- DEBUG: Checking for secret ---"
-          python -c "import os; print(f'The secret value is: {os.getenv(\"WEATHER_API_KEY\")}' )"
-          echo "--- END DEBUG ---"      
-
-          python level4_api_ingestion_engine/api_auth.py  
-          
-       
-      - name: 🕵️ Debug output
-        run: |
-          echo "=== Repo structure ==="
-          ls -R
-          echo "=== Git status ==="
-          git status
-     
       - name: 🧠 Inspect generated data
         run: |
           echo "=== Checking data folder ==="
-          ls -l data/
-          echo "=== Head of the CSV file ==="
-          head -n 5 data/api_auth.csv || echo "⚠️ CSV file not found"
-          echo "=== Git diff ==="
-          git diff --stat
-   
+          ls -l data/ || echo "No data folder"
+          echo "=== Head of CSV file ==="
+          head -n 5 data/api_auth.csv || echo "⚠️ CSV not found"
+
       - name: 💾 Commit updated dataset
         run: |
           git config --global user.name "api-ingestion[bot]"
-          git config --global user.email "api-ingestor[bot]@users.noreply.github.com"
+          git config --global user.email "api-ingestion[bot]@users.noreply.github.com"
           git add data/api_auth.csv
-          git commit -m "🧠 API Auth-Data-ingestion update: $(date)" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GT_TOKEN}}@github.com/${{ github.repository }} HEAD:main
+          git commit -m "🧠 API data update: $(date)" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
         env:
-          GT_TOKEN: ${{ secrets.GT_TOKEN}}
+          GT_TOKEN: ${{ secrets.GT_TOKEN }}

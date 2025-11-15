@@ -19,7 +19,7 @@ from scripts.config import headers, selector
 
 # === CONFIGURATIONS === #
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "scraper_dataset.csv"
-CATEGORY_FILE = Path("sites/categories.json")
+CATEGORY_FILE = Path("scripts/categories.json")
 
 # === GIT COMMIT FUNCTION === #
 

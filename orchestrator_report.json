@@ -1,0 +1,10 @@
+[
+    {
+        "job": "Auto_Scraper",
+        "success": false,
+        "attempts": 3,
+        "error": "[Errno 2] No such file or directory: 'sites\\\\categories.json'",
+        "duration_seconds": 0.10645,
+        "timestamp": "2025-11-14T16:51:55.974344"
+    }
+]
