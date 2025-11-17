@@ -6,11 +6,11 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-# Determine the root directory of the project 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+# Determine the root directory of the project and add it to sys.path
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
-#Add that root directory to Python's "search list"
-sys.path.append(str(ROOT_DIR))
   
 # --- Import jobs ---
 from level3_automated_ingestion_cycles.automated_scraper import run_automated_scraper
