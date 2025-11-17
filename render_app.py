@@ -29,7 +29,7 @@ def run_any_job():
     job = request.args.get("job")
 
     if not job:
-        return "❌ No job specified. Use /run?job=JOB_NAME", 400
+        return "❌ No job specified. Use /run?job=JOB_N AME", 400
 
     # Start background execution
     threading.Thread(target=background_runner, args=(job,)).start()

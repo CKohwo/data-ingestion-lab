@@ -38,7 +38,7 @@ jobs:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: |
           python level5_full_orchestration/orchestrator.py \
-            -job Api_Auth \
+            -job API_Auth \
             -verbose \
             -retries 3
 
