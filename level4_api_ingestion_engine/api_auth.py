@@ -13,8 +13,7 @@ load_dotenv()
 #This variable stores the Weather Api key
 API_KEY = os.getenv("WEATHER_API_KEY")
 
-if not API_KEY:
-    raise ValueError("⚠️ WEATHER_API_KEY not found in environment variables.")
+ 
 
 #This variable stores the list of city names for which weather data is to be fetched
  
@@ -130,6 +129,10 @@ def save_data(new_df, DATA_PATH=DATA_PATH):
 
 # == api_auth_ingestor.py == #
 def run_api_authentication():
+    # Validate API Key presence
+    if not API_KEY:
+        raise ValueError("⚠️ WEATHER_API_KEY not found in environment variables.")
+
     new_df = run_ingestion(CITY_NAME=CITY_NAME)
     if new_df is not None:
         save_data(new_df, DATA_PATH)
