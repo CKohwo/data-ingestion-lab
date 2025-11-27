@@ -53,6 +53,7 @@ jobs:
         run: |
           git config --global user.name "api-ingestion[bot]"
           git config --global user.email "api-ingestion[bot]@users.noreply.github.com"
+          git pull origin main --rebase
           git add data/api_auth.csv
           git commit -m "🧠 API data update: $(date)" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GT_TOKEN }}@github.com/${{ github.repository }} HEAD:main
