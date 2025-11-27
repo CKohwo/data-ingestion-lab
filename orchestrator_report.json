@@ -6,5 +6,69 @@
         "error": "[Errno 2] No such file or directory: 'sites\\\\categories.json'",
         "duration_seconds": 0.10645,
         "timestamp": "2025-11-14T16:51:55.974344"
+    },
+    {
+        "job": "API_Auth",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 7.047785,
+        "timestamp": "2025-11-27T03:42:08.433493"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 0.006428,
+        "timestamp": "2025-11-27T03:43:15.083145"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 28.283655,
+        "timestamp": "2025-11-27T03:47:25.347557"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 27.464426,
+        "timestamp": "2025-11-27T03:55:57.127318"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 32.855772,
+        "timestamp": "2025-11-27T04:08:32.663088"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 4.401601,
+        "timestamp": "2025-11-27T04:10:24.235935"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 2.850693,
+        "timestamp": "2025-11-27T04:12:35.633239"
+    },
+    {
+        "job": "API_Ingest",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 12.51613,
+        "timestamp": "2025-11-27T04:14:07.349798"
     }
 ]

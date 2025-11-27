@@ -22,7 +22,7 @@ def safe_get(API_URL, retries = 4, delay = 4):
     for attempt in range(retries):
         try:
             print(f"🌐 Attemp=t {attempt}: Fetching data from {API_URL}") 
-            response = requests.post(API_URL, headers ,json=payload, timeout = 10, verify=True)
+            response = requests.post(API_URL, headers=headers ,json=payload, timeout = 10, verify=True)
 
             response.raise_for_status()
             print("All is well...data fetched successfully!")
@@ -55,7 +55,7 @@ def load(data):
       df = pd.DataFrame(products)
       df['fetched_at'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
       print(f"✅ Normalized {len(df)} products into a clean DataFrame.")
-      return dfs
+      return df
     
     except Exception as e:
         print(f"❌ Error during normalization: {e}")
@@ -89,12 +89,12 @@ def run_api_ingestion():
     """High-level callable for orchestrator.py"""
     print("\n🚀 Starting API ingestion process...\n")
     try:
-        data = safe_get()
+        data = safe_get(API_URL)
         df = load(data)
         if df.empty:
             print("⚠️ No records fetched. Skipping CSV save.")
             return False
-        save_status = save_to_csv(df)
+        save_status = save_to_csv(df, CSV_PATH)
         print("✅ API ingestion completed successfully.\n")
         return save_status
     except Exception as e:
