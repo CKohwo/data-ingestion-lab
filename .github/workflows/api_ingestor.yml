@@ -36,10 +36,7 @@ jobs:
       - name: 🚀 Run Ecommerce API Ingestion
         run: |
           set -e
-          python level5_full_orchestration/orchestrator.py \
-            -job API_Ingest \
-            -verbos \ 
-            -retries 3  
+          python level5_full_orchestration/orchestrator.py -job API_Ingest -verbos -retries 3  
           
        
       - name: 🕵️ Debug output
