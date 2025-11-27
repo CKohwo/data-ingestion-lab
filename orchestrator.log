@@ -9,3 +9,7 @@
 2025-11-27 05:10:24,226 | INFO | Job succeeded: API_Ingest on attempt 1
 2025-11-27 05:12:35,629 | INFO | Job succeeded: API_Ingest on attempt 1
 2025-11-27 05:14:07,305 | INFO | Job succeeded: API_Ingest on attempt 1
+2025-11-27 10:47:52,153 | ERROR | Attempt 1 failed for API_Auth: run_ingestion() missing 1 required positional argument: 'API_KEY'
+2025-11-27 10:47:52,175 | ERROR | Attempt 2 failed for API_Auth: run_ingestion() missing 1 required positional argument: 'API_KEY'
+2025-11-27 10:47:52,178 | ERROR | Attempt 3 failed for API_Auth: run_ingestion() missing 1 required positional argument: 'API_KEY'
+2025-11-27 10:50:12,759 | INFO | Job succeeded: API_Auth on attempt 1

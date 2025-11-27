@@ -70,5 +70,21 @@
         "error": null,
         "duration_seconds": 12.51613,
         "timestamp": "2025-11-27T04:14:07.349798"
+    },
+    {
+        "job": "API_Auth",
+        "success": false,
+        "attempts": 3,
+        "error": "run_ingestion() missing 1 required positional argument: 'API_KEY'",
+        "duration_seconds": 0.049224,
+        "timestamp": "2025-11-27T09:47:52.179234"
+    },
+    {
+        "job": "API_Auth",
+        "success": true,
+        "attempts": 3,
+        "error": null,
+        "duration_seconds": 7.484128,
+        "timestamp": "2025-11-27T09:50:12.790665"
     }
 ]

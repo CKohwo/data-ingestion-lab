@@ -6,13 +6,6 @@ from dotenv import load_dotenv
 from pathlib import Path
 from scripts.api_config import CITY_NAME
 
-
-# Load environment variables from the (.env) file
-load_dotenv()
- 
-#This variable stores the Weather Api key
-API_KEY = os.getenv("WEATHER_API_KEY")
-
  
 
 #This variable stores the list of city names for which weather data is to be fetched
@@ -23,8 +16,8 @@ DATA_PATH = Path(__file__).resolve().parents[1] / "data" /"api_auth.csv"
  
 
 # Function to fetch weather data for a given city
-def fetch_weather_data(city: str) -> dict | None:
-    # Parameters for the API request
+def fetch_weather_data(city: str, API_KEY: str) -> dict | None:
+    """Fetch weather and air quality data for a given city."""
     params = {"key":API_KEY, "q": city, "aqi":"yes" }
    
     # Nested the API request in a try-except block to handle potential errors
@@ -76,14 +69,14 @@ def fetch_weather_data(city: str) -> dict | None:
         print(f"❌ Data Parsing Error for {city}: {e}")
         return None
 
-def run_ingestion(CITY_NAME : str) -> pd.DataFrame| None:
+def run_ingestion(CITY_NAME : str, API_KEY: str) -> pd.DataFrame| None:
 
     """Main execution function to fetch all data and save to CSV."""
     all_data = []
     print(f"--- 🌎 Starting Hybrid Ingestion for {len(CITY_NAME)} African Cities ---")
 
     for city in CITY_NAME:
-        row = fetch_weather_data(city)
+        row = fetch_weather_data(city, API_KEY)
         if row:
             all_data.append(row)
             print(f"✅ Fetched data for {row['City']}, {row['Country']}")
@@ -129,11 +122,16 @@ def save_data(new_df, DATA_PATH=DATA_PATH):
 
 # == api_auth_ingestor.py == #
 def run_api_authentication():
+    # Load environment variables from the (.env) file
+    load_dotenv()
+ 
+    # Parameters for the API request
+    API_KEY = os.getenv("WEATHER_API_KEY") 
     # Validate API Key presence
     if not API_KEY:
         raise ValueError("⚠️ WEATHER_API_KEY not found in environment variables.")
-
-    new_df = run_ingestion(CITY_NAME=CITY_NAME)
+     
+    new_df = run_ingestion(CITY_NAME=CITY_NAME, API_KEY=API_KEY)
     if new_df is not None:
         save_data(new_df, DATA_PATH)
 
