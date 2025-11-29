@@ -162,5 +162,5 @@ Phase 2 will introduce:
 - Data quality pipelines
 - Intelligent recommendations
 - KPI frameworks
-First step toward the ADIP intelligence layer
+
 This is where the system becomes smart and where I transition from ingestion to intelligence engineering.
