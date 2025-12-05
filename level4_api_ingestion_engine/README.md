@@ -19,6 +19,13 @@ It is part of the broader **Data Ingestion Lab**, a multi-phase system design ex
 
 ## 🧩 System Architecture
 
+graph TD
+   A[API Endpoints] -->|HTTP Requests| B[Auth Layer -> env]
+    B --> C[API Ingestion Engine]
+    C --> D[Data Normalization -> pandas]
+    D --> E[Storage Layer -> CSV/JSON]
+    E --> F[Logging & Reports]
+
 ```bash
  
     A[API Endpoint(s)] -->|HTTP Requests| B[Auth Layer (.env)]
