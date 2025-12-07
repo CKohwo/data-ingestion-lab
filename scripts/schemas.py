@@ -1,0 +1,1 @@
+ADIP_SCHEMA = ["timestamp_utc", "entity_id", "metric_type", "metric_value", "source"]
