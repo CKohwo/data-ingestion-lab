@@ -1,6 +1,6 @@
-# Data Intelligence Ingestion Lab
+# ADIP Ingestion Lab
 
-This repository documents the evolution of a foundational **Data Ingestion Engine**,  
+This repository documents the evolution of a foundational **ADIP Ingestion Engine**,  
 starting from a single-page scraper and scaling into a modular, automated, and API-integrated ingestion system. 
 
 Each level represents a new layer of capability — reflecting my personal evolution in  
@@ -31,7 +31,7 @@ This structure mirrors the way intelligent systems evolve: from reactive scripts
 ## 🧩 Repository Structure
 
 ```bash
-data-intelligence-ingestion-lab/
+ADIP-ingestion-lab/
 │
 ├── level1_single_page_scraper/
 │   ├── scraper.py
@@ -52,7 +52,10 @@ data-intelligence-ingestion-lab/
 │   └── authentication_api.py 
 │
 ├── level5_full_orchestration/
+│   └── orchestrator.py        
 │
+├── levelX_manual_ingestion/
+│   └── manual_engine.py
 └── README.md
 ```
 
