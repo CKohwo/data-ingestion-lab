@@ -28,7 +28,7 @@ JOBS = {
 
 # --- Logger ---
 logging.basicConfig(
-    filename="orchestrator.log",
+    filename="level5_full_orchestration/orchestrator.log",
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
 )
@@ -39,14 +39,14 @@ logger = logging.getLogger()
 def append_report(report):
     """Automatically append a single job report to orchestrator_report.json."""
     try:
-        with open("orchestrator_report.json") as f:
+        with open("level5_full_orchestration/orchestrator_report.json") as f:
             existing = json.load(f)
     except:
         existing = []
 
     existing.append(report)
 
-    with open("orchestrator_report.json", "w") as f:
+    with open("level5_full_orchestration/orchestrator_report.json", "w") as f:
         json.dump(existing, f, indent=4)
 
 

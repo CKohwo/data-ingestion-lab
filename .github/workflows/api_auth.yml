@@ -33,19 +33,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🚀 Run API Weather Ingestion
+          
+      - name: 🚀 Run API Auth Ingestion
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: |
           python level5_full_orchestration/orchestrator.py -job API_Auth -verbose -retries 3
 
-      - name: 🧠 Inspect generated data
-        run: |
-          echo "=== Checking data folder ==="
-          ls -l data/ || echo "No data folder"
-          echo "=== Head of CSV file ==="
-          head -n 5 data/api_auth.csv || echo "⚠️ CSV not found"
-
+      
       - name: 💾 Commit updated dataset
         run: |
           git config --global user.name "api-ingestion[bot]"
