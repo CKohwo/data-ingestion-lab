@@ -67,7 +67,7 @@ ADIP-ingestion-lab/
 - **v4.0.0** — Level 4: API ingestion Engine
 - **v5.0.0** — Level 5: Full orchestration (autonomous data ingestion system)
 
-```
+```bash
             +------------------------------+
             |     Unified Ingestion Layer  |
             +------------------------------+
