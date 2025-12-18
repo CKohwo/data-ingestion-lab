@@ -93,14 +93,14 @@ level3_automated_ingestiion_cycles/
 
 - **Run Locally (optional)** — python level3_automated_ingestion_cycles/automated_scraper.py    
  
-- **Automated Mode (default)** — GitHub Actions triggers the Render cloud (render_app.py) every 5 days, which then carries out the execution, uptime robot pings the render webservice every 5mins to prevent downtime, after successful process run the commits are then automatically saved.
+- **Automated Mode (default)** — The Render cloud (render_app.py) triggers every 24hrs, which then carries out the execution, uptime robot pings the render webservice every 5mins to prevent downtime, after successful process run the commits are then automatically saved.
 
 --------
 
 ## 📈 Expected Output
 
 ✅ Unified ingestion pipeline   
-✅ Full automation via GitHub Actions & Render
+✅ Full automation via Render & Uptime Robot
 ✅ Version-controlled, self-sustaining data pipeline
 ✅ Scalable architecture for future orchestration (Level 5)
 
