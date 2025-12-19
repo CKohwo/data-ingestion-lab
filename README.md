@@ -79,11 +79,11 @@ ADIP-ingestion-lab/
 ```
 ## 🎯 Purpose
 
-The **Data Intelligence Ingestion Lab** is a foundational milestone in the broader **ADIP (Automated Data Intelligence Platform)** architecture.  
+The **Data Ingestion Lab** is a foundational milestone in the broader **ADIP (Automated Data Intelligence Platform)** architecture.  
 It demonstrates the evolution of autonomous data pipelines capable of ingesting, cleaning, and unifying multi-source information — forming the core of adaptive, intelligent systems.
 
 ## 🧠 Author
-Charles — Technologist | Data Scientist | AI Systems Architect
+Charles — Technologist | Data Engineer | Data Scientist | AI Systems Architect
 A relentless pursuer of mastery in automation, intelligence engineering, and data systems design.
 This lab is part of a broader journey to engineer autonomy in digital ecosystems and create reusable, intelligent infrastructure for global industries.
 
